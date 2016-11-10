@@ -10,6 +10,7 @@ namespace YuukoResume.Models
         [MaxLength(64)]
         public string School { get; set; }
 
+        [Localized]
         public string Profession { get; set; }
 
         public DateTime From { get; set; }
