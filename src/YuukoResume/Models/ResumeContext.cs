@@ -13,6 +13,7 @@ namespace YuukoResume.Models
         public DbSet<Certificate> Certificates { get; set; }
         public DbSet<Education> Educations { get; set; }
         public DbSet<Experience> Experiences { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Skill> Skills { get; set; }
 
