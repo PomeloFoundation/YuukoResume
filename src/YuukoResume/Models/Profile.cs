@@ -23,5 +23,14 @@ namespace YuukoResume.Models
         [Localized]
         [MaxLength(128)]
         public string Position { get; set; }
+
+        [MaxLength(128)]
+        public string GitHubUrl { get; set; }
+
+        [MaxLength(128)]
+        public string BlogUrl { get; set; }
+
+        [MaxLength(128)]
+        public string LinkedInUrl { get; set; }
     }
 }
