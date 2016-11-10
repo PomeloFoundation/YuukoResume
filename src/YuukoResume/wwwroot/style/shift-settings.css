@@ -1,0 +1,84 @@
+/*Blue*/
+.blue,
+#blog_page_link,
+#blog_page_link .icon,
+#blog_page_link span.label,
+.section_header .section_title a span.icon, 
+.section_header .section_title strong span.icon,
+.blog_section .section_header .section_title .section_name  { 
+	background-color: #327ea3; 
+}
+/*Aqua*/
+.aqua,
+#profile_page_link,
+#profile_page_link .icon,
+#profile_page_link span.label,
+.section_header.profile_section_header .section_title .section_name,
+.section_header.profile_section_header .section_title a span.icon,
+.section_header.link .section_title strong span.section_name,
+.section_header.link .section_title strong span.icon,
+.dark #portfolio_iso_filters li a.current,
+.dark #portfolio_iso_filters li a.current:hover ,
+#portfolio_iso_filters li a.current ,
+#portfolio_iso_filters li a.current:hover  {
+	background-color: #4ca5d0;
+	border-color: #4ca5d0;
+
+}
+/*Green*/
+.green,
+.section_header .section_title.resume_section_title a span.icon,
+#resume_link,
+#resume_link span.label,
+#resume_link span.icon ,
+.section_header.gallery .section_title strong span.section_name, 
+.section_header.gallery .section_title strong span.icon {
+	background-color: #6ca338;
+}
+/*yellow*/
+.yellow,
+.section_header .section_title.portfolio_section_title a span.icon,
+.section_header.audio .section_title strong span.section_name,
+.section_header.audio .section_title strong span.icon {
+	background-color: #ffbc38;
+}
+/*Red*/
+.red,
+#mainpage_accordion_area .section_header.contact_section_header a span.icon,
+.sc_contact_form .title:after,
+.section_header.video .section_title strong span.section_name,
+.section_header.video .section_title strong span.icon {
+	background-color: #e82c0c;
+}
+
+
+
+
+
+
+#resume_link_download,
+#resume_link_download  span.label,
+#resume_link_download  span.icon {
+	background: #019875;
+}
+.section_header.status .section_title strong span.section_name, 
+.section_header.status .section_title strong span.icon {
+	background-color: #ebb72c;
+}
+.section_header.quote .section_title strong span.section_name,
+.section_header.quote .section_title strong span.icon ,
+.section_header.quote .section_title strong span.section_name,
+.section_header.quote .section_title strong span.icon {
+	background-color: #33cccc;
+}
+#scrollTo,
+#scrollTo .icon,
+#scrollTo .label {
+	background-color: #815b97;
+}
+
+#bg_col ,
+body.colored ,
+body.image_bg {
+	background: #4d7d7d center 0 no-repeat
+}
