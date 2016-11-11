@@ -20,7 +20,11 @@ namespace YuukoResume
                 .AddViewLocalization();
 
             services.AddEntityFrameworkSqlite()
-                .AddDbContext<ResumeContext>(x => x.UseSqlite("resume.db"));
+                .AddDbContext<ResumeContext>(x => 
+                {
+                    x.UseSqlite("resume.db");
+                    x.UseSqliteLolita();
+                });
 
             services.AddBlobStorage()
                 .AddEntityFrameworkStorage<ResumeContext>();

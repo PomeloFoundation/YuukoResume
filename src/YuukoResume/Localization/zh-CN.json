@@ -14,6 +14,7 @@
   "Sign Out": "注销登录",
   "Notifications": "系统消息",
   "Configure your website information here.": "在这里配置您站点的基本信息。",
+  "Edit Profile": "编辑个人资料",
   "Full Name": "姓名",
   "Birthday": "生日",
   "Telephone": "联系电话",
@@ -29,5 +30,9 @@
   "Admin Password": "管理员密码",
   "Save Changes": "保存修改",
   "Succeeded": "操作成功",
-  "Your profile has been saved successfully.": "您的个人信息已经保存成功！"
+  "Your profile has been saved successfully.": "您的个人信息已经保存成功！",
+  "Age": "年龄",
+  "The project has been removed successfully.": "该项目已经成功删除！",
+  "Project info has been saved successfully.": "项目信息已成功保存！",
+  "Project info has been created successfully.": "项目信息已成功创建！"
 }

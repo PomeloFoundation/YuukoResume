@@ -53,7 +53,11 @@ namespace YuukoResume.Controllers
         }
         #endregion
 
-        #region Profile Management
+        #region Dashboard & Profile Management
+        [HttpGet]
+        [AdminRequired]
+        public IActionResult Index() => View();
+
         [HttpGet]
         [AdminRequired]
         public IActionResult Profile() => View();
@@ -70,7 +74,77 @@ namespace YuukoResume.Controllers
                 x.Details = SR["Your profile has been saved successfully."];
             });
         }
+        #endregion
 
+        #region Project Management
+        [HttpGet]
+        [AdminRequired]
+        public IActionResult Project() => PagedView(DB.Projects.OrderByDescending(x => x.From).ThenBy(x => x.To), 10);
+
+        [HttpPost]
+        [AdminRequired]
+        [ValidateAntiForgeryToken]
+        [Route("[controller]/Project/Remove/{id}")]
+        public async Task<IActionResult> RemoveProject(long id)
+        {
+            await DB.Projects
+                .Where(x => x.Id == id)
+                .DeleteAsync();
+            return Prompt(x =>
+            {
+                x.Title = SR["Succeeded"];
+                x.Details = "The project has been removed successfully.";
+            });
+        }
+
+        [HttpGet]
+        [AdminRequired]
+        [Route("[controller]/Project/Edit/{id}")]
+        public async Task<IActionResult> EditProject(long id) => View(await DB.Projects.SingleAsync(x => x.Id == id));
+
+        [HttpPost]
+        [AdminRequired]
+        [ValidateAntiForgeryToken]
+        [Route("[controller]/Project/Edit/{id}")]
+        public async Task<IActionResult> EditProject(long id, Project Model)
+        {
+            var project = await DB.Projects.SingleAsync(x => x.Id == id);
+            project.BlobId = Model.BlobId;
+            project.Catalog = Model.Catalog;
+            project.DemoUrl = Model.DemoUrl;
+            project.Description = Model.Description;
+            project.From = Model.From;
+            project.To = Model.To;
+            project.GitHub = Model.GitHub;
+            project.Tags = Model.Tags;
+            project.Title = Model.Title;
+            await DB.SaveChangesAsync();
+            return Prompt(x =>
+            {
+                x.Title = SR["Succeeded"];
+                x.Details = SR["Project info has been saved successfully."];
+            });
+        }
+
+        [HttpGet]
+        [AdminRequired]
+        [Route("[controller]/Project/Create")]
+        public IActionResult CreateProject() => View();
+
+        [HttpPost]
+        [AdminRequired]
+        [ValidateAntiForgeryToken]
+        [Route("[controller]/Project/Create")]
+        public async Task<IActionResult> CreateProject(Project Model)
+        {
+            DB.Projects.Add(Model);
+            await DB.SaveChangesAsync();
+            return Prompt(x =>
+            {
+                x.Title = SR["Succeeded"];
+                x.Details = SR["Project info has been created successfully."];
+            });
+        }
         #endregion
     }
 }
