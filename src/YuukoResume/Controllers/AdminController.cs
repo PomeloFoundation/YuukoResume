@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using YuukoResume.Models;
 using YuukoResume.Filters;
 
 namespace YuukoResume.Controllers
@@ -51,8 +52,25 @@ namespace YuukoResume.Controllers
             return RedirectToAction("Index", "Home");
         }
         #endregion
+
+        #region Profile Management
         [HttpGet]
         [AdminRequired]
         public IActionResult Profile() => View();
+
+        [HttpPost]
+        [AdminRequired]
+        [ValidateAntiForgeryToken]
+        public IActionResult Profile(Profile Model)
+        {
+            Startup.Profile = Model;
+            return Prompt(x => 
+            {
+                x.Title = SR["Succeeded"];
+                x.Details = SR["Your profile has been saved successfully."];
+            });
+        }
+
+        #endregion
     }
 }

@@ -27,5 +27,7 @@
   "SMTP Password": "SMTP密码",
   "Admin Username": "管理员用户名",
   "Admin Password": "管理员密码",
-  "Save Changes": "保存修改"
+  "Save Changes": "保存修改",
+  "Succeeded": "操作成功",
+  "Your profile has been saved successfully.": "您的个人信息已经保存成功！"
 }

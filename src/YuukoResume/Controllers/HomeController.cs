@@ -55,9 +55,9 @@ namespace YuukoResume.Controllers
                     .OrderByDescending(x => x.PRI)
                     .ToListAsync();
             },
-            async () =>
+            () =>
             {
-                ViewBag.Profile = await DB.Profiles.FirstAsync();
+                ViewBag.Profile = Startup.Profile;
             });
             return View();
         }
