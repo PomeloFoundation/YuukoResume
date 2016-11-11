@@ -39,8 +39,7 @@ namespace YuukoResume
             {
                 x.AddCulture(new[] { "zh", "zh-CN", "zh-Hans" }, new JsonLocalizedStringStore(Path.Combine("Localization", "zh-CN.json")));
                 x.AddCulture(new[] { "en", "en-US" }, new JsonLocalizedStringStore(Path.Combine("Localization", "en-US.json")));
-            })
-                .AddBaiduTranslator();
+            });
 
             services.AddSmtpEmailSender("smtp.exmail.qq.com", 25, "Mano Cloud", "noreply@mano.cloud", "noreply@mano.cloud", "ManoCloud123456");
         }

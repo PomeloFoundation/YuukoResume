@@ -50,5 +50,6 @@
   "Visitor": "访客记录",
   "YEAR_MONTH_FORMAT": "yyyy.MM",
   "Your profile has been saved successfully.": "您的个人信息已经保存成功！",
-  "present": "现在"
+  "present": "现在",
+  "{0} years old": "{0}岁"
 }
