@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Pomelo.AspNetCore.Localization;
 using YuukoResume.Models;
 using YuukoResume.Filters;
 
@@ -66,8 +65,21 @@ namespace YuukoResume.Controllers
         [HttpPost]
         [AdminRequired]
         [ValidateAntiForgeryToken]
-        public IActionResult Profile(Profile Model)
+        public IActionResult Profile(Profile Model, string _name, string _position, string _selfIntroduce, [FromServices] ICultureProvider cultureProvider)
         {
+            var key = cultureProvider.DetermineCulture();
+            Model.Name = Startup.Profile.Name;
+            Model.Position = Startup.Profile.Position;
+            Model.SelfIntroduce = Startup.Profile.SelfIntroduce;
+            if (Model.Name.ContainsKey(key))
+                Model.Name.Remove(key);
+            if (Model.Position.ContainsKey(key))
+                Model.Position.Remove(key);
+            if (Model.SelfIntroduce.ContainsKey(key))
+                Model.SelfIntroduce.Remove(key);
+            Model.Name.Add(key, _name);
+            Model.Position.Add(key, _name);
+            Model.SelfIntroduce.Add(key, _name);
             Startup.Profile = Model;
             System.IO.File.WriteAllText("profile.json", JsonConvert.SerializeObject(Model));
             return Prompt(x => 
@@ -343,6 +355,10 @@ namespace YuukoResume.Controllers
                 x.Details = SR["Experience has been created successfully."];
             });
         }
+        #endregion
+
+        #region Log Management
+        public IActionResult Log() => PagedView(DB.Logs.OrderByDescending(x => x.Time));
         #endregion
     }
 }

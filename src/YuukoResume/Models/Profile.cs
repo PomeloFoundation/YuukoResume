@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace YuukoResume.Models
@@ -7,17 +8,17 @@ namespace YuukoResume.Models
     {
         public long Id { get; set; }
         
-        public string Name { get; set; }
+        public Dictionary<string, string> Name { get; set; }
 
         public DateTime Birthday { get; set; }
 
         public string Telephone { get; set; }
 
         public string Email { get; set; }
-        
-        public string SelfIntroduce { get; set; }
-        
-        public string Position { get; set; }
+
+        public Dictionary<string, string> SelfIntroduce { get; set; }
+
+        public Dictionary<string, string> Position { get; set; }
         
         public string GitHubUrl { get; set; }
         

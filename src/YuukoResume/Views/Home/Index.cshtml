@@ -1,10 +1,16 @@
-﻿
+﻿@{ 
+    var CurrentCulture = CultureProvider.DetermineCulture();
+    var Name = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Name[CurrentCulture] : YuukoResume.Startup.Profile.Name.First().Value;
+    var Position = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Position[CurrentCulture] : YuukoResume.Startup.Profile.Position.First().Value;
+    var SelfIntroduce = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.SelfIntroduce[CurrentCulture] : YuukoResume.Startup.Profile.SelfIntroduce.First().Value;
+    var Colors = new[] { "blue", "aqua", "green", "yellow", "red" };
+}
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>郑逸笙 - 个人简历</title>
+    <title>@Name - @SR["Curriculum Vitae"]</title>
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
     <link rel="stylesheet" type="text/css" media="all" href="style/style.css">
     <link rel="stylesheet" type="text/css" media="all" href="style/responsive.css">
@@ -25,8 +31,14 @@
         <header role="banner" class="site_header" id="header">
             <div class="social_links">
                 <ul>
-                    <li><a href="http://www.linkedin.com/in/%E9%80%B8%E7%AC%99-%E9%83%91-3b9980100" target="_blank" title="Linkedin"><i class="icon icon-linkedin"></i></a></li>
-                    <li><a href="https://github.com/Kagamine" target="_blank" title="GitHub"><i class="icon icon-github"></i></a></li>
+                    @if (!string.IsNullOrWhiteSpace(YuukoResume.Startup.Profile.LinkedInUrl))
+                    {
+                        <li><a href="@YuukoResume.Startup.Profile.LinkedInUrl" target="_blank" title="Linkedin"><i class="icon icon-linkedin"></i></a></li>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(YuukoResume.Startup.Profile.GitHubUrl))
+                    {
+                        <li><a href="https://github.com/Kagamine" target="_blank" title="GitHub"><i class="icon icon-github"></i></a></li>
+                    }
                 </ul>
             </div>
         </header>
@@ -34,7 +46,7 @@
             <div class="content_area" id="primary">
                 <div role="main" class="site_content" id="content">
                     <section class="section profile_section first odd" id="profile">
-                        <a id="blog_page_link" href="http://1234.sh"><span class="icon-pencil icon"></span><span class="label">Blog</span></a>
+                        <a id="blog_page_link" href="@(string.IsNullOrWhiteSpace(YuukoResume.Startup.Profile.BlogUrl) ? "#" : YuukoResume.Startup.Profile.BlogUrl)"><span class="icon-pencil icon"></span><span class="label">Blog</span></a>
                         <div class="section_header profile_section_header opened">
                             <h2 class="section_title profile_section_title vis"><a href="#"><span class="icon icon-user"></span><span class="section_name">Profile</span></a><span class="section_icon"></span></h2>
                             <div id="profile_header">
@@ -42,16 +54,16 @@
                                     <div id="profile_photo"><img src="images/avatar.jpg" /></div>
                                     <div id="profile_name_area">
                                         <div id="profile_name">
-                                            <h1 id="profile_title"><span class="firstname">郑</span> <span class="lastname">逸笙</span></h1>
+                                            <h1 id="profile_title"><span class="firstname">@Name</span></h1>
                                             <h4 id="profile_position">Software Development Engineer</h4>
-                                            <h4>22岁 / 180-450-54321 / 1@1234.sh</h4>
+                                            <h4>@((DateTime.Now - YuukoResume.Startup.Profile.Birthday).TotalDays / 365)岁 / @YuukoResume.Startup.Profile.Telephone / @YuukoResume.Startup.Profile.Email</h4>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="section_body profile_section_body">
-                            <div class="proile_body">11年.NET开发经验，曾通过GitHub向ASP.NET Core贡献代码，世界首发的MySQL for Entity Framework Core Provider作者，GitHub中有上百开源项目。 </div>
+                            <div class="proile_body">@SelfIntroduce </div>
                         </div>
                     </section>
                     <div id="mainpage_accordion_area">

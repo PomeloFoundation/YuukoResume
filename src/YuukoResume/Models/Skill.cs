@@ -2,8 +2,9 @@
 {
     public enum SkillPerformance
     {
-        Bar,
-        Circle
+        Profession,
+        Other,
+        Language
     }
 
     public class Skill

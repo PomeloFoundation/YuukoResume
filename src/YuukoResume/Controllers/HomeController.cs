@@ -13,15 +13,22 @@ namespace YuukoResume.Controllers
         {
             Parallel.Invoke(async ()=> 
             {
-                ViewBag.SkillsBar = await DB.Skills
-                    .Where(x => x.Performance == Models.SkillPerformance.Bar)
+                ViewBag.ProfessionSkills = await DB.Skills
+                    .Where(x => x.Performance == Models.SkillPerformance.Profession)
                     .OrderByDescending(x => x.Level)
                     .ToListAsync();
-            }, 
-            async ()=>
+            },
+            async () =>
             {
-                ViewBag.SkillsCircle = await DB.Skills
-                    .Where(x => x.Performance == Models.SkillPerformance.Circle)
+                ViewBag.OtherSkills = await DB.Skills
+                    .Where(x => x.Performance == Models.SkillPerformance.Other)
+                    .OrderByDescending(x => x.Level)
+                    .ToListAsync();
+            },
+            async () =>
+            {
+                ViewBag.LanguageSkills = await DB.Skills
+                    .Where(x => x.Performance == Models.SkillPerformance.Language)
                     .OrderByDescending(x => x.Level)
                     .ToListAsync();
             },
