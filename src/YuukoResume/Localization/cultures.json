@@ -1,0 +1,10 @@
+﻿[
+  {
+    "Source": "en-US.json",
+    "Cultures": [ "en", "en-US", "en-GB" ]
+  },
+  {
+    "Source": "zh-CN.json",
+    "Cultures": [ "zh", "zh-CN", "zh-Hans" ]
+  }
+]
