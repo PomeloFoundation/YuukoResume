@@ -6,35 +6,35 @@
     <link rel="icon" type="image/png" href="assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>@ViewBag.Title - 红包云平台</title>
+    <title>@ViewBag.Title - @SR["Admin Panel"]</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/assets/css/animate.min.css" rel="stylesheet" />
-    <link href="~/assets/css/light-bootstrap-dashboard.css" rel="stylesheet" />
-    <link href="~/assets/css/demo.css" rel="stylesheet" />
+    <link href="~/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/admin/css/animate.min.css" rel="stylesheet" />
+    <link href="~/admin/css/light-bootstrap-dashboard.css" rel="stylesheet" />
+    <link href="~/admin/css/demo.css" rel="stylesheet" />
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-    <link href="~/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-    <link href="~/assets/css/datetimepicker.css" rel="stylesheet" />
+    <link href="~/admin/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <link href="~/admin/css/datetimepicker.css" rel="stylesheet" />
 
-    <script src="~/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-    <script src="~/assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="~/assets/js/bootstrap-checkbox-radio-switch.js"></script>
-    <script src="~/assets/js/chartist.min.js"></script>
-    <script src="~/assets/js/bootstrap-notify.js"></script>
-    <script src="~/assets/js/light-bootstrap-dashboard.js"></script>
-    <script src="~/assets/js/jquery.datetimepicker.js"></script>
-    <script src="~/assets/js/jquery.pomelo.fileupload.js"></script>
-    <script src="~/assets/js/moment.js"></script>
-    <script src="~/assets/js/jquery.signalr-2.0.3.js"></script>
+    <script src="~/admin/js/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="~/admin/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/admin/js/bootstrap-checkbox-radio-switch.js"></script>
+    <script src="~/admin/js/chartist.min.js"></script>
+    <script src="~/admin/js/bootstrap-notify.js"></script>
+    <script src="~/admin/js/light-bootstrap-dashboard.js"></script>
+    <script src="~/admin/js/jquery.datetimepicker.js"></script>
+    <script src="~/admin/js/jquery.pomelo.fileupload.js"></script>
+    <script src="~/admin/js/moment.js"></script>
+    <script src="~/admin/js/jquery.signalr-2.0.3.js"></script>
     <script src="/signalr/hubs"></script>
 </head>
 <body>
 
     <div class="wrapper">
-        <div class="sidebar" data-color="purple" data-image="/assets/img/sidebar-5.jpg">
+        <div class="sidebar" data-color="purple" data-image="/admin/img/sidebar-5.jpg">
 
             <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
 
@@ -42,71 +42,63 @@
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <a asp-action="Index" asp-controller="Home" class="simple-text">
-                        微信云红包
+                        Yuuko Resume
                     </a>
                 </div>
 
                 <ul class="nav">
                     <li>
-                        <a asp-action="Index" asp-controller="Home">
+                        <a asp-action="Index" asp-controller="Admin">
                             <i class="pe-7s-graph"></i>
-                            <p>仪表盘</p>
+                            <p>@SR["Dashboard"]</p>
                         </a>
                     </li>
-                    @*<li>
-                        <a asp-action="Pay" asp-controller="Account">
-                            <i class="pe-7s-cash"></i>
-                            <p>账户充值</p>
-                        </a>
-                    </li>*@
                     <li>
-                        <a asp-action="Index" asp-controller="RedPocket">
+                        <a asp-action="Education" asp-controller="Admin">
                             <i class="pe-7s-wallet"></i>
-                            <p>红包活动</p>
+                            <p>@SR["Education"]</p>
                         </a>
                     </li>
                     <li>
-                        <a asp-action="Template" asp-controller="RedPocket">
+                        <a asp-action="Experience" asp-controller="Admin">
                             <i class="pe-7s-plugin"></i>
-                            <p>红包模板</p>
+                            <p>@SR["Experience"]</p>
                         </a>
                     </li>
                     <li>
-                        <a asp-action="Index" asp-controller="Coupon">
+                        <a asp-action="Skill" asp-controller="Admin">
                             <i class="pe-7s-cash"></i>
-                            <p>优惠券</p>
+                            <p>@SR["Skill"]</p>
                         </a>
                     </li>
-                    @if (User.IsInRole("Root"))
-                    {
-                        <li>
-                            <a asp-action="BlackList" asp-controller="RedPocket">
-                                <i class="pe-7s-albums"></i>
-                                <p>黑名单</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a asp-action="Compensate" asp-controller="RedPocket">
-                                <i class="pe-7s-shield"></i>
-                                <p>补发红包</p>
-                            </a>
-                        </li>                        <li>
-                            <a asp-action="Index" asp-controller="Account">
-                                <i class="pe-7s-users"></i>
-                                <p>商户管理</p>
-                            </a>
-                        </li>
-                    }
                     <li>
-                        <a asp-action="Password" asp-controller="Account">
-                            <i class="pe-7s-lock"></i>
-                            <p>修改密码</p>
+                        <a asp-action="Project" asp-controller="Admin">
+                            <i class="pe-7s-albums"></i>
+                            <p>@SR["Projects"]</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Certificate" asp-controller="Admin">
+                            <i class="pe-7s-shield"></i>
+                            <p>@SR["Certificate"]</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Visitor" asp-controller="Admin">
+                            <i class="pe-7s-shield"></i>
+                            <p>@SR["Visitor"]</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Home">
+                            <i class="pe-7s-angle-left-circle"></i>
+                            <p>@SR["Back To Home"]</p>
                         </a>
                     </li>
                     <li>
                         <a href="javascript:$('#frmLogout').submit()">
                             <i class="pe-7s-angle-left-circle"></i>
-                            <p>注销登录</p>
+                            <p>@SR["Sign Out"]</p>
                         </a>
                     </li>
                 </ul>
@@ -123,7 +115,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">系统消息</a>
+                        <a class="navbar-brand" href="#">@SR["Notifications"]</a>
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-left">
@@ -139,20 +131,12 @@
                                 @if (ViewBag.Notifications.Count > 0)
                                 {
                                     <ul class="dropdown-menu">
-                                        @foreach (NotificationViewModel x in ViewBag.Notifications)
+                                        @foreach (var x in ViewBag.Notifications)
                                         {
-                                            <li><a href="@x.Url">@x.Text</a></li>
+                                            <li>@SR["SENT_TO_EMAIL", x.Time.ToString(SR["DATE_FORMAT"]), x.Email]</li>
                                         }
                                     </ul>
                                 }
-                            </li>
-                        </ul>
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="#">
-                                    余额：@Html.Money(User.Current.Balance)
-                                </a>
                             </li>
                         </ul>
                     </div>
@@ -176,7 +160,7 @@
         </div>
     </div>
 
-    <form id="frmLogout" asp-action="SignOut" asp-controller="Account"></form>
+    <form id="frmLogout" asp-action="Logout" asp-controller="Admin"></form>
 </body>
 
 </html>

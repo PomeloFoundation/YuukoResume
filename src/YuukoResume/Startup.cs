@@ -5,12 +5,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.AspNetCore.Localization;
+using Newtonsoft.Json;
 using YuukoResume.Models;
 
 namespace YuukoResume
 {
     public class Startup
     {
+        public static Profile Profile = JsonConvert.DeserializeObject<Profile>(File.ReadAllText("profile.json"));
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc()
@@ -34,6 +37,8 @@ namespace YuukoResume
                 x.AddCulture(new[] { "en", "en-US" }, new JsonLocalizedStringStore(Path.Combine("Localization", "en-US.json")));
             })
                 .AddBaiduTranslator();
+
+            services.AddSmtpEmailSender("smtp.exmail.qq.com", 25, "Mano Cloud", "noreply@mano.cloud", "noreply@mano.cloud", "ManoCloud123456");
         }
 
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)

@@ -1,0 +1,91 @@
+﻿@{ 
+    ViewBag.Title = SR["Dashboard"];
+}
+
+<form asp-action="Password" asp-controller="Account" class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">@ViewBag.Title</h4>
+                <p class="category">@SR["Configure your website information here."]</p>
+            </div>
+            <div class="content table-responsive table-full-width">
+                <table class="table table-hover table-striped">
+                    <tr>
+                        <td>@SR["Full Name"]</td>
+                        <td><input type="text" name="Name" class="form-control" value="@YuukoResume.Startup.Profile.Name" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["Birthday"]</td>
+                        <td><input type="text" name="Birthday" class="datetime form-control" value="@YuukoResume.Startup.Profile.Birthday.ToString(SR["BIRTHDAY_FORMAT"])" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["Telephone"]</td>
+                        <td><input type="text" name="Telephone" class="form-control" value="@YuukoResume.Startup.Profile.Telephone" /></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="text" name="Email" class="form-control" value="@YuukoResume.Startup.Profile.Email" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["Telephone"]</td>
+                        <td><input type="text" name="Telephone" class="form-control" value="@YuukoResume.Startup.Profile.Telephone" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["Position"]</td>
+                        <td><input type="text" name="Position" class="form-control" value="@YuukoResume.Startup.Profile.Position" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["SelfIntroduce"]</td>
+                        <td>
+                            <textarea name="SelfIntroduce" style="height: 250px;" class="form-control">@YuukoResume.Startup.Profile.SelfIntroduce</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@SR["GitHub Homepage"]</td>
+                        <td><input type="text" name="GitHubUrl" class="form-control" value="@YuukoResume.Startup.Profile.GitHubUrl" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["LinkedIn Homepage"]</td>
+                        <td><input type="text" name="LinkedInUrl" class="form-control" value="@YuukoResume.Startup.Profile.LinkedInUrl" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["Blog URL"]</td>
+                        <td><input type="text" name="BlogUrl" class="form-control" value="@YuukoResume.Startup.Profile.BlogUrl" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["SMTP Host"]</td>
+                        <td><input type="text" name="SmtpServer" class="form-control" value="@YuukoResume.Startup.Profile.SmtpServer" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["SMTP Port"]</td>
+                        <td><input type="text" name="SmtpPort" class="form-control" value="@YuukoResume.Startup.Profile.SmtpPort" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["SMTP Username"]</td>
+                        <td><input type="text" name="SmtpUsername" class="form-control" value="@YuukoResume.Startup.Profile.SmtpUsername" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["SMTP Password"]</td>
+                        <td><input type="text" name="SmtpPassword" class="form-control" value="@YuukoResume.Startup.Profile.SmtpPassword" /></td>
+                    </tr>
+                    <tr>
+                        <td>SMTP SSL</td>
+                        <td><input @(YuukoResume.Startup.Profile.SmtpSSL ? "checked" : "") name="SmtpSsl" value="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["Admin Username"]</td>
+                        <td><input type="text" name="Username" class="form-control" value="@YuukoResume.Startup.Profile.Username" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["Admin Password"]</td>
+                        <td><input type="text" name="Password" class="form-control" value="@YuukoResume.Startup.Profile.Password" /></td>
+                    </tr>
+                </table>
+                <p style="text-align: center">
+                    <input type="submit" class="btn btn-danger" value="@SR["Save Changes"]" />
+                </p>
+            </div>
+        </div>
+    </div>
+</form>

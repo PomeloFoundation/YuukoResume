@@ -6,9 +6,7 @@ namespace YuukoResume.Models
     public class Profile
     {
         public long Id { get; set; }
-
-        [Localized]
-        [MaxLength(64)]
+        
         public string Name { get; set; }
 
         public DateTime Birthday { get; set; }
@@ -16,27 +14,29 @@ namespace YuukoResume.Models
         public string Telephone { get; set; }
 
         public string Email { get; set; }
-
-        [Localized]
+        
         public string SelfIntroduce { get; set; }
-
-        [Localized]
-        [MaxLength(128)]
+        
         public string Position { get; set; }
-
-        [MaxLength(128)]
+        
         public string GitHubUrl { get; set; }
-
-        [MaxLength(128)]
+        
         public string BlogUrl { get; set; }
-
-        [MaxLength(128)]
+        
         public string LinkedInUrl { get; set; }
-
-        [MaxLength(64)]
+        
         public string Username { get; set; }
-
-        [MaxLength(64)]
+        
         public string Password { get; set; }
+        
+        public string SmtpServer { get; set; }
+        
+        public string SmtpUsername { get; set; }
+        
+        public string SmtpPassword { get; set; }
+
+        public int SmtpPort { get; set; }
+
+        public bool SmtpSSL { get; set; }
     }
 }
