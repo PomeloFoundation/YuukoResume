@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using YuukoResume.ViewModels;
 
 namespace YuukoResume.Controllers
 {
@@ -13,8 +14,8 @@ namespace YuukoResume.Controllers
         {
             Parallel.Invoke(async ()=> 
             {
-                ViewBag.ProfessionSkills = await DB.Skills
-                    .Where(x => x.Performance == Models.SkillPerformance.Profession)
+                ViewBag.ProfessionalSkills = await DB.Skills
+                    .Where(x => x.Performance == Models.SkillPerformance.Professional)
                     .OrderByDescending(x => x.Level)
                     .ToListAsync();
             },
@@ -42,7 +43,7 @@ namespace YuukoResume.Controllers
             {
                 ViewBag.Projects = await DB.Projects
                     .GroupBy(x => x.Catalog)
-                    .Select(x => new
+                    .Select(x => new GroupedProject
                     {
                         Catalog = x.Key,
                         Projects = x.OrderByDescending(y => y.From)

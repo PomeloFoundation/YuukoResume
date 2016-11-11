@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     var CurrentCulture = CultureProvider.DetermineCulture();
     var Name = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Name[CurrentCulture] : YuukoResume.Startup.Profile.Name.First().Value;
     var Position = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Position[CurrentCulture] : YuukoResume.Startup.Profile.Position.First().Value;
@@ -76,33 +76,21 @@
                             <div class="section_body resume_section_body">
                                 <div class="sidebar resume_sidebar">
                                     <aside class="widget widget_skills">
-                                        <h3 class="widget_title">编程能力</h3>
+                                        <h3 class="widget_title">@SR["Professional Skills"]</h3>
                                         <div class="widget_inner style_1">
-                                            <div class="skills_row odd first"><span class="caption">C#</span><span class="progressbar"><span data-process="100%" class="progress blue"><span class="value">100%</span></span></span></div>
-                                            <div class="skills_row even"><span class="caption">VB.NET</span><span class="progressbar"><span data-process="100%" class="progress aqua"><span class="value">100%</span></span></span></div>
-                                            <div class="skills_row odd"><span class="caption">HTML</span><span class="progressbar"><span data-process="100%" class="progress green"><span class="value">100%</span></span></span></div>
-                                            <div class="skills_row even"><span class="caption">CSS</span><span class="progressbar"><span data-process="100%" class="progress yellow"><span class="value">100%</span></span></span></div>
-                                            <div class="skills_row odd"><span class="caption">JavaScript(frontend)</span><span class="progressbar"><span data-process="95%" class="progress red"><span class="value">95%</span></span></span></div>
-                                            <div class="skills_row even"><span class="caption">Node.js</span><span class="progressbar"><span data-process="90%" class="progress blue"><span class="value">90%</span></span></span></div>
-                                            <div class="skills_row odd"><span class="caption">MySQL</span><span class="progressbar"><span data-process="90%" class="progress aqua"><span class="value">95%</span></span></span></div>
-                                            <div class="skills_row even"><span class="caption">MyCAT</span><span class="progressbar"><span data-process="100%" class="progress green"><span class="value">100%</span></span></span></div>
-                                            <div class="skills_row odd"><span class="caption">SQL Server</span><span class="progressbar"><span data-process="70%" class="progress yellow"><span class="value">70%</span></span></span></div>
-                                            <div class="skills_row even"><span class="caption">Postgre SQL</span><span class="progressbar"><span data-process="78%" class="progress red"><span class="value">78%</span></span></span></div>
-                                            <div class="skills_row odd"><span class="caption">.NET Core / ASP.NET Core</span><span class="progressbar"><span data-process="100%" class="progress blue"><span class="value">100%</span></span></span></div>
-                                            <div class="skills_row even"><span class="caption">React.js</span><span class="progressbar"><span data-process="70%" class="progress aqua"><span class="value">70%</span></span></span></div>
-                                            <div class="skills_row odd"><span class="caption">SignalR</span><span class="progressbar"><span data-process="100%" class="progress green"><span class="value">100%</span></span></span></div>
-                                            <div class="skills_row even"><span class="caption">Windows 32 API</span><span class="progressbar"><span data-process="80%" class="progress yellow"><span class="value">80%</span></span></span></div>
-                                            <div class="skills_row odd"><span class="caption">Visual Studio</span><span class="progressbar"><span data-process="90%" class="progress red"><span class="value">90%</span></span></span></div>
+                                            @for (var i = 0; i < ViewBag.ProfessionalSkills.Count; i++)
+                                            {
+                                                <div class="skills_row @(i % 2 == 0 ? "odd" : "even") @(i == 0 ? "first" : "")"><span class="caption">@ViewBag.ProfessionalSkills[i].Title</span><span class="progressbar"><span data-process="@ViewBag.ProfessionalSkills[i].Level%" class="progress @Colors[i % Colors.Count()]"><span class="value">@ViewBag.ProfessionalSkills[i].Level%</span></span></span></div>
+                                            }
                                         </div>
                                     </aside>
                                     <aside class="widget widget_skills">
-                                        <h3 class="widget_title">图像/影像技能</h3>
+                                        <h3 class="widget_title">@SR["Other Skills"]</h3>
                                         <div class="widget_inner style_2">
-                                            <div class="skills_row odd"><span class="legend blue"></span><span class="caption">Adobe Photoshop</span></div>
-                                            <div class="skills_row even"><span class="legend aqua"></span><span class="caption">Adobe Illustrator</span></div>
-                                            <div class="skills_row odd"><span class="legend green"></span><span class="caption">Adobe Flash</span></div>
-                                            <div class="skills_row even"><span class="legend yellow"></span><span class="caption">Adobe Premiere</span></div>
-                                            <div class="skills_row odd"><span class="legend red"></span><span class="caption">绘声绘影</span></div>
+                                            @for (var i = 0; i < ViewBag.OtherSkills; i++)
+                                            {
+                                                <div class="skills_row @(i % 2 == 0 ? "odd" : "even")"><span class="legend @(Colors[i % Colors.Count()])"></span><span class="caption">@ViewBag.OtherSkills[i].Title</span></div>
+                                            }
                                             <div class="svg">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="piechart">
                                                     <path d="M66,66 L130,66  A64,64 0 0,1 57,129 z" fill="#327ea3"></path>
@@ -116,55 +104,53 @@
                                         </div>
                                     </aside>
                                     <aside class="widget widget_skills">
-                                        <h3 class="widget_title">交流技能</h3>
+                                        <h3 class="widget_title">@SR["Language Skills"]</h3>
                                         <div class="widget_inner style_3">
-                                            <div class="skills_row odd first"><span class="caption">中文</span><span class="progressbar"><span data-process="100%" class="progress aqua"></span></span></div>
-                                            <div class="skills_row even"><span class="caption">English</span><span class="progressbar"><span data-process="70%" class="progress green"></span></span></div>
+                                            @for (var i = 0; i < ViewBag.LanguageSkills.Count; i++)
+                                            {
+                                                <div class="skills_row @(i % 2 == 0 ? "odd" : "even") @(i == 0 ? "first" : "")"><span class="caption">@ViewBag.LanguageSkills[i].Title</span><span class="progressbar"><span data-process="@ViewBag.LanguageSkills[i].Level%" class="progress @Colors[i % Colors.Count()]"></span></span></div>
+                                            }
                                         </div>
                                     </aside>
                                 </div>
                                 <div class="wrapper resume_wrapper">
                                     <div class="category resume_category resume_category_1 first even">
                                         <div class="category_header resume_category_header">
-                                            <h3 class="category_title"><span class="category_title_icon aqua"></span>曾经任职</h3>
+                                            <h3 class="category_title"><span class="category_title_icon aqua"></span>@SR["Experience"]</h3>
                                         </div>
                                         <div class="category_body resume_category_body">
-                                            <article class="post resume_post resume_post_1 first even">
-                                                <div class="post_header resume_post_header">
-                                                    <div class="resume_period"> <span class="period_from">2016</span> - <span class="period_to">present</span> </div>
-                                                    <h4 class="post_title"><span class="post_title_icon aqua"></span><a href="#">黑龙江宏鼎科技股份有限公司</a></h4>
-                                                    <h5 class="post_subtitle">技术副总裁</h5>
-                                                </div>
-                                                <div class="post_body resume_post_body">
-                                                    <p>任职期间，组织开发了黑龙江人民广播电台主播互动分布式平台。</p>
-                                                </div>
-                                            </article>
-                                            <article class="post resume_post resume_post_2 odd">
-                                                <div class="post_header resume_post_header">
-                                                    <div class="resume_period"> <span class="period_from">2015</span> - <span class="period_to">2016</span> </div>
-                                                    <h4 class="post_title"><span class="post_title_icon aqua"></span><a href="#">哈尔滨市码锋科技有限责任公司</a></h4>
-                                                    <h5 class="post_subtitle">总经理</h5>
-                                                </div>
-                                                <div class="post_body resume_post_body">
-                                                    <p>带领开发了齐齐哈尔广播电视大学市民学习网、飞鹤鲜奶配送系统、黑龙江省中国电信网格管理系统、黑龙江省中国铁塔基站规划系统、北京清北学堂信息学在线评测系统等。</p>
-                                                </div>
-                                            </article>
+                                            @for (var i = 0; i < ViewBag.Experiences; i++)
+                                            {
+                                                <article class="post resume_post resume_post_1 @(i == 0 ? "first" : "") @(i % 2 == 0 ? "odd" : "even")">
+                                                    <div class="post_header resume_post_header">
+                                                        <div class="resume_period"> <span class="period_from">@ViewBag.Experiences[i].From.ToString(SR["YEAR_MONTH_FORMAT"])</span> - <span class="period_to">@(ViewBag.Experiences[i].To == null ? SR["present"] : ViewBag.Experiences[i].Value.To.ToString(SR["YEAR_MONTH_FORMAT"]))</span> </div>
+                                                        <h4 class="post_title"><span class="post_title_icon aqua"></span><a href="#">@ViewBag.Experiences[i].Company</a></h4>
+                                                        <h5 class="post_subtitle">@ViewBag.Experiences[i].Position</h5>
+                                                    </div>
+                                                    <div class="post_body resume_post_body">
+                                                        @Html.Marked(ViewBag.Experiences[i].Description as string)
+                                                    </div>
+                                                </article>
+                                            }
                                         </div>
                                         <!-- .category_body -->
                                     </div>
                                     <!-- .category -->
                                     <div class="category resume_category resume_category_2 odd">
                                         <div class="category_header resume_category_header">
-                                            <h3 class="category_title"><span class="category_title_icon green"></span>教育经历</h3>
+                                            <h3 class="category_title"><span class="category_title_icon green"></span>@SR["Education"]</h3>
                                         </div>
                                         <div class="category_body resume_category_body">
-                                            <article class="post resume_post resume_post_1 first even">
-                                                <div class="post_header resume_post_header">
-                                                    <div class="resume_period"> <span class="period_from">2012</span> - <span class="period_to">2016</span> </div>
-                                                    <h4 class="post_title"><span class="post_title_icon green"></span><a href="#">齐齐哈尔大学</a></h4>
-                                                    <h5 class="post_subtitle">软件工程 本科</h5>
-                                                </div>
-                                            </article>
+                                            @for (var i = 0; i < ViewBag.Educations.Count; i++)
+                                            {
+                                                <article class="post resume_post resume_post_@i @(i == 0 ? "first" : "") @(i % 2 == 0 ? "odd" : "even")">
+                                                    <div class="post_header resume_post_header">
+                                                        <div class="resume_period"> <span class="period_from">@ViewBag.Educations[i].From.ToString(SR["YEAR_MONTH_FORMAT"])</span> - <span class="period_to">@(ViewBag.Educations[i].To == null ? SR["present"] : ViewBag.Educations[i].To.Value.ToString(SR["YEAR_MONTH_FORMAT"]))</span> </div>
+                                                        <h4 class="post_title"><span class="post_title_icon green"></span><a href="#">@ViewBag.Educations[i].School</a></h4>
+                                                        <h5 class="post_subtitle">@ViewBag.Educations[i].Profession</h5>
+                                                    </div>
+                                                </article>
+                                            }
                                         </div>
                                         <!-- /category_body -->
                                     </div>
@@ -182,372 +168,48 @@
                             </div>
                             <div class="section_body portfolio_section_body">
                                 <div class="wrapper resume_wrapper">
-                                    <div class="category resume_category resume_category_1 first even">
-                                        <div class="category_header resume_category_header">
-                                            <h3 class="category_title"><span class="category_title_icon red"></span>框架开发</h3>
-                                        </div>
-                                        <div class="category_body resume_category_body">
-                                            <article class="post resume_post resume_post_1 first even">
-                                                <div class="post_header resume_post_header">
-                                                    <div class="resume_period"> <span class="period_from">2016.05</div>
-                                                    <h4 class="post_title"><span class="post_title_icon red"></span><a href="#">Pomelo.EntityFrameworkCore.MySql</a></h4>
-                                                    <h5 class="post_subtitle">
-                                                        <i class="icon icon-tags"></i> .NET Core, Entity Framework Core, MySQL
-                                                        &nbsp;&nbsp;
-                                                        <i class="icon icon-github"></i> <a target="_blank" href="https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql">PomeloFoundation/Pomelo.EntityFrameworkCore.MySql</a>
-                                                    </h5>
-                                                </div>
-                                                <div class="post_body resume_post_body">
-                                                    <p>世界首发开源免费的MySQL For Entity Framework Core Provider，支持全部EF Core特性，如迁移、Eager Load等。本作品被Microsoft推荐到Entity Framework Core官方文档中：<a href="https://docs.efproject.net/en/latest/providers/pomelo/index.html">https://docs.efproject.net/en/latest/providers/pomelo/index.html</a>。本作品从ADO.NET层至EF层均为原创，未借鉴任何来自Oracle公司开源的代码，同时对异步查询以及Enums、Json等类型支持良好，在NuGet Gallery中可查到每日有近四十个项目引用本库。</p>
-                                                </div>
-                                            </article>
-
-                                            <article class="post resume_post resume_post_1 odd">
-                                                <div class="post_header resume_post_header">
-                                                    <div class="resume_period"> <span class="period_from">2016.06</div>
-                                                    <h4 class="post_title"><span class="post_title_icon red"></span><a href="#">Pomelo.EntityFrameworkCore.MyCat</a></h4>
-                                                    <h5 class="post_subtitle">
-                                                        <i class="icon icon-tags"></i> .NET Core, Entity Framework Core, MyCAT
-                                                        &nbsp;&nbsp;
-                                                        <i class="icon icon-github"></i> <a target="_blank" href="https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MyCat">PomeloFoundation/Pomelo.EntityFrameworkCore.MyCat</a>
-                                                    </h5>
-                                                </div>
-                                                <div class="post_body resume_post_body">
-                                                    <p>MyCAT是一个开源的分布式数据库系统，是一个实现了MySQL协议的服务器，前端用户可以把它看作是一个数据库代理，用MySQL客户端工具和命令行访问，而其后端可以用MySQL原生协议与多个MySQL服务器通信，也可以用JDBC协议与大多数主流数据库服务器通信，其核心功能是分表分库，即将一个大表水平分割为N个小表，存储在后端MySQL服务器里或者其他数据库里。</p>
-                                                    <p>但由于MyCAT本身不支持多语句提交，同时在Join语句处理时与原生MySQL不一致。因此开发人员无法直接使用MySQL For Entity Framework Core操作MyCAT，于是本作品诞生了。使用该库可使开发者无需考虑MyCAT繁琐的配置，使用Entity Framework中的Migrations功能可直接创建库、创建表，并且自动实现水平切分。开发人员在修改表结构时，也无需一一将数据节点中结构进行修改，使用Migrations功能，本库将自动进入各个节点实现Migrate功能。</p>
-                                                    <br />
-                                                    <p style="text-align:center;">
-                                                        <iframe height=360 width=640 style="max-width:100%!important;" src='http://player.youku.com/embed/XMTY5NzA4NzQ0OA==' frameborder=0 'allowfullscreen'></iframe>
-                                                    </p>
-                                                </div>
-                                            </article>
-
-                                            <article class="post resume_post resume_post_1 even">
-                                                <div class="post_header resume_post_header">
-                                                    <div class="resume_period"> <span class="period_from">2015.08 ~ 2016.06</div>
-                                                    <h4 class="post_title"><span class="post_title_icon red"></span><a href="#">.NET Core Extensions</a></h4>
-                                                    <h5 class="post_subtitle">
-                                                        <i class="icon icon-tags"></i> .NET Core
-                                                        &nbsp;&nbsp;
-                                                        <i class="icon icon-github"></i> <a target="_blank" href="https://github.com/PomeloFoundation/dotNETCore-Extensions">PomeloFoundation/dotNETCore-Extensions</a>
-                                                    </h5>
-                                                </div>
-                                                <div class="post_body resume_post_body">
-                                                    <p>在Microsoft .NET Core发展初期，基础库缺失较为严重，如没有SMTP支持等。本作品则提供了诸如：SMTP支持、定时事务、MVC多模板支持、反XSS攻击支持、Markdown渲染支持、Excel读写、反向代理、本地化等，为开发者提供便捷。本作品在NuGet Gallery中已有近十万次下载。</p>
-                                                </div>
-                                            </article>
-
-                                            <article class="post resume_post resume_post_1 odd">
-                                                <div class="post_header resume_post_header">
-                                                    <div class="resume_period"> <span class="period_from">2016.04</div>
-                                                    <h4 class="post_title"><span class="post_title_icon red"></span><a href="#">JFlick</a></h4>
-                                                    <h5 class="post_subtitle">
-                                                        <i class="icon icon-tags"></i> HTML5
-                                                    </h5>
-                                                </div>
-                                                <div class="post_body resume_post_body">
-                                                    <p>本作品是一个适用于移动设备的前端MVC框架，本框架实现了仿原生系统的动画效果，并在JavaScript中引入MVC、路由、布局页等概念（类似ASP.NET MVC），与Cordova或类似技术配合将给用户带来良好的体验。</p>
-                                                    <br />
-                                                    <p style="text-align:center;">
-                                                        <img src="images/jflick.gif" style="max-height:530px;max-width:300px" />
-                                                        <img src="images/jflick-3.gif" style="max-height:530px;max-width:300px" />
-                                                    </p>
-                                                    <p>受gif动画局限，上图中毛玻璃效果失真，下图为正确显示效果：</p>
-                                                    <br />
-                                                    <p style="text-align:center;">
-                                                        <img src="images/jflick-2.png" style="max-width:300px" />
-                                                    </p>
-                                                    <br />
-                                                    <p>此外，本人使用该框架开发了一款移动平台云端IDE系统来验证本框架，整体效果请看下面的视频：</p>
-                                                    <br />
-                                                    <p style="text-align:center;">
-                                                        <iframe height=360 width=640 style="max-width:100%!important;" src='http://player.youku.com/embed/XMTU5ODk1NTc0NA==' frameborder=0 'allowfullscreen'></iframe>
-                                                    </p>
-                                                </div>
-                                            </article>
-                                        </div>
-                                        <!-- .category_body -->
-                                    </div>
-                                    <!-- .category -->
-                                    <div class="category resume_category resume_category_2 odd">
-                                        <div class="category_header resume_category_header">
-                                            <h3 class="category_title"><span class="category_title_icon yellow"></span>应用开发</h3>
-                                        </div>
-                                        <div class="category_body resume_category_body">
-                                            <div class="category_body resume_category_body">
-                                                <article class="post resume_post resume_post_1 first even">
-                                                    <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">2016.05</div>
-                                                        <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">黑龙江人民广播电台摇红包系统</a></h4>
-                                                        <h5 class="post_subtitle">
-                                                            <i class="icon icon-tags"></i> ASP.NET Core
-                                                        </h5>
-                                                    </div>
-                                                    <div class="post_body resume_post_body">
-                                                        <p>黑龙江人民广播电台旗下几十个频道，每小时均有微信发放红包活动，本平台解决高并发量情况下的摇红包逻辑。厂家预估每秒将有一万人摇红包，因此本系统采用分布式架构设计，前端将SignalR通过Redis进行Scale Out，后端数据库使用MyCAT进行分片。系统采用了Entity Framework Core (ORM)来处理与数据库的交互请求。最终由4台2核8G内存的服务器承载，达到了10000TPS。</p>
-                                                        <br />
-                                                        <p style="text-align:center;">
-                                                            <img src="images/redpocket-schema.jpg" />
-                                                        </p>
-                                                        <br />
-                                                        <p style="text-align:center;">
-                                                            <img src="images/redpocket.png" />
-                                                        </p>
-                                                    </div>
-                                                </article>
-
-                                                <article class="post resume_post resume_post_1 odd">
-                                                    <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">2016.06</div>
-                                                        <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">Tentacle Guitar</a></h4>
-                                                        <h5 class="post_subtitle">
-                                                            <i class="icon icon-tags"></i> Unity 3D
-                                                            &nbsp;&nbsp;
-                                                            <i class="icon icon-github"></i> <a target="_blank" href="https://github.com/TentacleGuitar/TentacleGuitar">TentacleGuitar/TentacleGuitar</a>
-                                                        </h5>
-                                                    </div>
-                                                    <div class="post_body resume_post_body">
-                                                        <p>本项目为本人2016上海TechCrunch Hackathon参赛作品，并在几十组选手中脱颖而出，取得全场第二名（亚军）成绩。本游戏为一款吉他教学游戏，玩家可将电吉他或带有拾音器的木吉他接入手机或PC中，选择歌曲，按照谱面进行演奏。本项目分三大模块：谱面解析、吉他声音频率识别、游戏场景控制。</p>
-                                                        <br />
-                                                        <p style="text-align:center;">
-                                                            <img src="images/guitar.png">
-                                                            <img src="images/guitar-2.png">
-                                                        </p>
-                                                    </div>
-                                                </article>
-
-                                                <article class="post resume_post resume_post_1 even">
-                                                    <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">2016.05</div>
-                                                        <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">Pomelo IDE</a></h4>
-                                                        <h5 class="post_subtitle">
-                                                            <i class="icon icon-tags"></i> .NET Core, Azure
-                                                            &nbsp;&nbsp;
-                                                            <i class="icon icon-github"></i> <a target="_blank" href="https://github.com/PomeloIDE">PomeloIDE</a>
-                                                        </h5>
-                                                    </div>
-                                                    <div class="post_body resume_post_body">
-                                                        <p>Pomelo IDE是一个移动平台云端集成开发环境，支持基于OmniSharp的IntelliSense、可以在iPad上对代码进行调试等操作。项目使用了Cordova、ASP.NET Core、SignalR、Azure等技术。同时本作品为2016 Microsoft Azure Hackathon的参赛作品，获得全国入围奖。</p>
-                                                        <br />
-                                                        <p style="text-align:center;">
-                                                            <img src="images/pomeloide.jpg">
-                                                            <img src="images/azure-hackathon.png" style="max-width: 300px;">
-                                                        </p>
-                                                    </div>
-                                                </article>
-
-                                                <article class="post resume_post resume_post_1 odd">
-                                                    <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">2016.05</div>
-                                                        <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">黑龙江中国铁塔数据校验平台</a></h4>
-                                                        <h5 class="post_subtitle">
-                                                            <i class="icon icon-tags"></i> ASP.NET Core
-                                                        </h5>
-                                                    </div>
-                                                    <div class="post_body resume_post_body">
-                                                        <p>中国铁塔公司每月将会把海量基站、设备等信息数据发送给省级单位，省级单位需要校对数据是否正确，而数据量过大，因此需要一套系统，通过预设规则，来判断设备是否属于某个地市，将地市数据分发给下级权限的账号中，并通过预设的规则初步校验数据是否合法。</p>
-                                                        <p>该项目使用分布式结构设计，由多台服务器同时进行校验以及拆分。使用ASP.NET Core技术开发，MySQL数据库。</p>
-                                                        <br />
-                                                        <p style="text-align:center;">
-                                                            <img src="images/chinatower-verification-1.png">
-                                                            <img src="images/chinatower-verification-2.png">
-                                                        </p>
-                                                    </div>
-                                                </article>
-
-                                                <article class="post resume_post resume_post_1 even">
-                                                    <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">2016.03</div>
-                                                        <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">中国电信网格管理系统</a></h4>
-                                                        <h5 class="post_subtitle">
-                                                            <i class="icon icon-tags"></i> ASP.NET Core
-                                                        </h5>
-                                                    </div>
-                                                    <div class="post_body resume_post_body">
-                                                        <p>中国电信集团每个月为各个下属经营单位下发月报，其中包括用户地址及状态，各个下属的经营单位在统计这些地址时极其不便，工作效率较低。因此需要一套系统来让使用者预先划分片区，根据地址反推经纬度，将地址归拢至小区中，并在小区中自动建楼，按楼层直观看出哪些用户在网，哪些欠费，客户经理应当去哪些楼进行回访。</p>
-                                                        <br />
-                                                        <p style="text-align:center;">
-                                                            <img src="images/ct-1.png">
-                                                            <img src="images/ct-2.png">
-                                                        </p>
-                                                    </div>
-                                                </article>
-
-                                                <article class="post resume_post resume_post_1 odd">
-                                                    <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">2015.11</div>
-                                                        <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">黑龙江中国铁塔基站规划系统</a></h4>
-                                                        <h5 class="post_subtitle">
-                                                            <i class="icon icon-tags"></i> ASP.NET Core
-                                                        </h5>
-                                                    </div>
-                                                    <div class="post_body resume_post_body">
-                                                        <p>中国铁塔公司每月将会把海量基站、设备等信息数据发送给省级单位，省级单位需要校对数据是否正确，而数据量过大，因此需要一套系统，通过预设规则，来判断设备是否属于某个地市，将地市数据分发给下级权限的账号中，并通过预设的规则初步校验数据是否合法。</p>
-                                                        <br />
-                                                        <p style="text-align:center;">
-                                                            <img src="images/chinatower.jpg">
-                                                        </p>
-                                                    </div>
-                                                </article>
-
-                                                <article class="post resume_post resume_post_1 even">
-                                                    <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">2015.11</div>
-                                                        <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">vNext China</a></h4>
-                                                        <h5 class="post_subtitle">
-                                                            <i class="icon icon-tags"></i> ASP.NET MVC 5
-                                                        </h5>
-                                                    </div>
-                                                    <div class="post_body resume_post_body">
-                                                        <p>vNext China是一个针对ASP.NET Core的在线学习网站，网站中预设了许多实验，用户可以按照实验要求完成实验并将代码上传至平台，平台将以单元测试的形式测试网站逻辑是否正确，并打分。</p>
-                                                        <br />
-                                                        <p style="text-align:center;">
-                                                            <img src="images/vnextcn-1.jpg">
-                                                            <img src="images/vnextcn-2.jpg">
-                                                        </p>
-                                                    </div>
-                                                </article>
-
-                                                <article class="post resume_post resume_post_1 odd">
-                                                    <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">2015.08</div>
-                                                        <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">飞鹤鲜奶配送系统</a></h4>
-                                                        <h5 class="post_subtitle">
-                                                            <i class="icon icon-tags"></i> Node.js, MongoDB
-                                                        </h5>
-                                                    </div>
-                                                    <div class="post_body resume_post_body">
-                                                        <p>本系统处理齐齐哈尔市的飞鹤鲜奶订单录入、配送报表生成、配送车辆管理、赠品管理等。使用Express.js + Mongoose开发。</p>
-                                                        <br />
-                                                        <p style="text-align:center;">
-                                                            <img src="images/firmus.png">
-                                                        </p>
-                                                    </div>
-                                                </article>
-
-                                                <article class="post resume_post resume_post_1 even">
-                                                    <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">2015.03</div>
-                                                        <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">Easy Sense 项目管理系统</a></h4>
-                                                        <h5 class="post_subtitle">
-                                                            <i class="icon icon-tags"></i> ASP.NET MVC 5
-                                                        </h5>
-                                                    </div>
-                                                    <div class="post_body resume_post_body">
-                                                        <p>系统支持项目管理、财务管理、报表生成、日报月报提交、财龄提醒等多项功能，使用ASP.NET MVC 5开发，后端使用Entity Framework 6连接SQL Server数据库。</p>
-                                                        <br />
-                                                        <p style="text-align:center;">
-                                                            <img src="images/es-1.png">
-                                                            <img src="images/es-2.png">
-                                                        </p>
-                                                    </div>
-                                                </article>
-
-                                                <article class="post resume_post resume_post_1 even">
-                                                    <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">2014</div>
-                                                        <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">Code Comb 算法程序在线评测系统</a></h4>
-                                                        <h5 class="post_subtitle">
-                                                            <i class="icon icon-tags"></i> ASP.NET MVC 5, Win32 API, Xamarin
-                                                            &nbsp;&nbsp;
-                                                            <i class="icon icon-github"></i> <a target="_blank" href="https://github.com/Kagamine/CodeComb-old">Kagamine/CodeComb-old</a>
-                                                        </h5>
-                                                    </div>
-                                                    <div class="post_body resume_post_body">
-                                                        <p>本平台是一个算法学习平台，用户注册账号后，管理员在后台设置题目描述信息以及测试用的输入输出数据，平台就将编译用户提交的程序并使用预设的输入数据对用户程序进行测试，测试部分采用了分布式设计，使用SignalR C# client与主服务器通讯，平台支持多种赛制如ACM-ICPC、OI、Codeforces、TopCoder等。此外，还使用Xamarin开发了手机客户端，用户可在手机上查询比赛日程、或进行群聊等。</p>
-                                                        <br />
-                                                        <p style="text-align:center;">
-                                                            <img src="images/codecomb-1.png">
-                                                            <img src="images/codecomb-2.png">
-                                                            <img src="images/codecomb-3.png">
-                                                        </p>
-                                                    </div>
-                                                </article>
-
-                                                <article class="post resume_post resume_post_1 even">
-                                                    <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">2014</div>
-                                                        <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">Smart WeChat</a></h4>
-                                                        <h5 class="post_subtitle">
-                                                            <i class="icon icon-tags"></i> ASP.NET MVC 5
-                                                        </h5>
-                                                    </div>
-                                                    <div class="post_body resume_post_body">
-                                                        <p>Smart Wechat是按照微信官方接口要求设计的第三方微信公众号二次开发平台，使用OAuth2、Web API等技术与微信官方通讯，本系统包括了汽车模块、餐饮模板、销售模板、KTV模板、会员系统、抽奖模块等功能。</p>
-                                                        <br />
-                                                        <p style="text-align:center;">
-                                                            <img src="images/smartwechat-1.png">
-                                                            <img src="images/smartwechat-2.png">
-                                                            <img src="images/smartwechat-3.png">
-                                                        </p>
-                                                    </div>
-                                                </article>
-
-                                                <article class="post resume_post resume_post_1 even">
-                                                    <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">2014</div>
-                                                        <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">Cena Plus</a></h4>
-                                                        <h5 class="post_subtitle">
-                                                            <i class="icon icon-tags"></i> WPF, WCF
-                                                            &nbsp;&nbsp;
-                                                            <i class="icon icon-github"></i> <a target="_blank" href="https://github.com/CenaPlus">CenaPlus</a>
-                                                        </h5>
-                                                    </div>
-                                                    <div class="post_body resume_post_body">
-                                                        <p>该项目被分为两部分，第一部分是服务端，服务端承载比赛服务，用户可以对比赛的信息、题目测试数据进行设置，服务器会对选手提交代码进行评测。服务端实现了OI、ACM、Codeforces、TopCoder四种比赛的逻辑。第二部分则为客户端，用户可以搜索局域网中的Cena+服务器或通过IP+端口的方式连接到Internet上的Cena+服务器，使用竞赛举办方提供的用户登录参与比赛。该系统使用WPF UI框架与WCF通讯框架实现。同时服务端支持通过Internet方式扩展评测服务节点以扩展评测能力。</p>
-                                                        <p>本系统共有三个不同平台的版本：Windows、Mac OS、Linux，其中Linux与Mac OS下的UI使用GTK#构建。</p>
-                                                        <br />
-                                                        <p style="text-align:center;">
-                                                            <img src="images/cenaplus.jpg">
-                                                        </p>
-                                                        <p>该作品为第七届全国大学生程序设计大赛作品，取得决赛一等奖成绩</p>
-                                                        <br />
-                                                        <p style="text-align:center;">
-                                                            <img src="images/cenaplus-cert.jpg">
-                                                        </p>
-                                                    </div>
-                                                </article>
-
-                                                <article class="post resume_post resume_post_1 even">
-                                                    <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">2014</div>
-                                                        <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">齐齐哈尔华乐音乐学校网站</a></h4>
-                                                        <h5 class="post_subtitle">
-                                                            <i class="icon icon-tags"></i> ASP.NET MVC 5
-                                                        </h5>
-                                                    </div>
-                                                    <div class="post_body resume_post_body">
-                                                        <p style="text-align:center;">
-                                                            <img src="images/huayue.png" style="max-width: 400px;" />
-                                                        </p>
-                                                    </div>
-                                                </article>
-
-                                                <article class="post resume_post resume_post_1 even">
-                                                    <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">2008</div>
-                                                        <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">末日武器(穿越火线游戏外挂)</a></h4>
-                                                        <h5 class="post_subtitle">
-                                                            <i class="icon icon-tags"></i> Win32 API
-                                                        </h5>
-                                                    </div>
-                                                    <div class="post_body resume_post_body">
-                                                        <p>本作品采用sxs注入方式，修改游戏内部内存，使枪械无后坐力。同时利用D3D技术，实现透视功能。</p>
-                                                        <br />
-                                                        <p style="text-align:center;">
-                                                            <img src="images/moriwuqi-1.jpg">
-                                                            <img src="images/moriwuqi-2.jpg">
-                                                        </p>
-                                                    </div>
-                                                </article>
-
+                                    @foreach (GroupedProject group in ViewBag.Projects)
+                                    {
+                                        <div class="category">
+                                            <div class="category_header resume_category_header">
+                                                <h3 class="category_title"><span class="category_title_icon red"></span>@group.Catalog</h3>
                                             </div>
-                                            <!-- /category_body -->
+                                            <div class="category_body resume_category_body">
+                                                @for (var i = 0; i < group.Projects.Count(); i++)
+                                                {
+                                                    <article class="post resume_post resume_post_@i @(i == 0 ? "first" : "") @(i % 2 == 0 ? "odd" : "even")">
+                                                        <div class="post_header resume_post_header">
+                                                            <div class="resume_period"> <span class="period_from">@group.Projects.ElementAt(i).From.ToString(SR["YEAR_MONTH_FORMAT"])</span> - <span class="period_to">@(group.Projects.ElementAt(i).To == null ? SR["present"] : group.Projects.ElementAt(i).To.Value.ToString(SR["YEAR_MONTH_FORMAT"]))</span></div>
+                                                            <h4 class="post_title"><span class="post_title_icon red"></span><a href="#">Pomelo.EntityFrameworkCore.MySql</a></h4>
+                                                            <h5 class="post_subtitle">
+                                                                @if (!string.IsNullOrWhiteSpace(group.Projects.ElementAt(i).Tags))
+                                                                {
+                                                                    <i class="icon icon-tags"></i>@group.Projects.ElementAt(i).Tags
+                                                                }
+                                                                @if (!string.IsNullOrWhiteSpace(group.Projects.ElementAt(i).GitHub))
+                                                                {
+                                                                    @("&nbsp; &nbsp;")
+                                                                    <i class="icon icon-github"></i> <a target="_blank" href="@group.Projects.ElementAt(i).GitHub">@group.Projects.ElementAt(i).GitHub.Replace("https://github.com/", "")</a>
+                                                                }
+                                                                @if (!string.IsNullOrWhiteSpace(group.Projects.ElementAt(i).GitHub))
+                                                                {
+                                                                    @("&nbsp; &nbsp;")
+                                                                    <i class="icon icon-eye-open"></i> <a target="_blank" href="@group.Projects.ElementAt(i).DemoUrl">Demo</a>
+                                                                }
+                                                            </h5>
+                                                        </div>
+                                                        <div class="post_body resume_post_body">
+                                                            @Html.Marked(group.Projects.ElementAt(i).Description)
+                                                        </div>
+                                                    </article>
+                                                }
+                                            </div>
+                                            <!-- .category_body -->
                                         </div>
-                                        <!-- /category -->
-                                    </div>
+                                    }
                                 </div>
-                                <!-- .section_body -->
+                            </div>
+                            <!-- .section_body -->
                         </section>
                         <!-- /PORTFOLIO -->
                         <!-- CONTACTS -->
@@ -556,10 +218,10 @@
                                 <h2 class="section_title contact_section_title"><a href="#"><span class="icon icon-certificate"></span><span class="section_name">Certificates</span></a><span class="section_icon"></span></h2>
                             </div>
                             <div class="section_body contact_section_body certificates">
-                                <img src="images/mvp.png">
-                                <img src="images/mcsd.png">
-                                <img src="images/ms.jpg">
-                                <img src="images/adobe.png">
+                                @foreach (Certificate x in ViewBag.Certificates)
+                                {
+                                    <img src="/file/download/@x.BlobId">
+                                }
                             </div>
                             <!-- .section_body -->
                         </section>
@@ -574,7 +236,7 @@
         <!-- #main -->
 
         <footer role="contentinfo" class="site_footer" id="footer">
-            <div class="footer_copyright">&copy; 2016 All Rights Reserved.</div>
+            <div class="footer_copyright">&copy; <a href="https://github.com/PomeloFoundation/YuukoResume">Pomelo Foundation</a> 2016 All Rights Reserved.</div>
         </footer>
     </div>
     <!-- #page -->

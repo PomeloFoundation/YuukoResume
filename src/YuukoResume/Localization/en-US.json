@@ -1,5 +1,6 @@
 ﻿{
-  "SENT_TO_EMAIL": "{1} Requested your CV at {0}",
+  "BIRTHDAY_FORMAT": "MM/dd/yyyy",
   "DATE_FORMAT": "MM/dd/yyyy HH:mm",
-  "BIRTHDAY_FORMAT": "MM/dd/yyyy"
+  "SENT_TO_EMAIL": "{1} Requested your CV at {0}",
+  "YEAR_MONTH_FORMAT": "MMM yyyy"
 }

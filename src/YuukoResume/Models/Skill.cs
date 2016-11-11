@@ -2,7 +2,7 @@
 {
     public enum SkillPerformance
     {
-        Profession,
+        Professional,
         Other,
         Language
     }

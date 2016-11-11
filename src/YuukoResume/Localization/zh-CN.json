@@ -24,9 +24,12 @@
   "Experience has been saved successfully.": "工作经验已经修改成功！",
   "Full Name": "姓名",
   "GitHub Homepage": "GitHub主页",
+  "Language Skills": "语言技能",
   "LinkedIn Homepage": "领英主页",
   "Notifications": "系统消息",
+  "Other Skills": "其他技能",
   "Position": "职位",
+  "Professional Skills": "专业技能",
   "Project info has been created successfully.": "项目信息已成功创建！",
   "Project info has been saved successfully.": "项目信息已成功保存！",
   "Projects": "项目经验",
@@ -45,5 +48,7 @@
   "Telephone": "联系电话",
   "The project has been removed successfully.": "该项目已经成功删除！",
   "Visitor": "访客记录",
-  "Your profile has been saved successfully.": "您的个人信息已经保存成功！"
+  "YEAR_MONTH_FORMAT": "yyyy.MM",
+  "Your profile has been saved successfully.": "您的个人信息已经保存成功！",
+  "present": "现在"
 }
