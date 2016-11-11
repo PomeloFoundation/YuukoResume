@@ -41,5 +41,8 @@
   "Skill has been removed successfully.": "技能信息已经删除成功！",
   "Skill has been saved successfully.": "技能信息已经修改成功！",
   "Certificate has been created successfully.": "证书信息已经创建成功！",
-  "Certificate has been removed successfully.": "证书信息已经删除成功！"
+  "Certificate has been removed successfully.": "证书信息已经删除成功！",
+  "Experience has been removed successfully.": "工作经验已经删除成功！",
+  "Experience has been created successfully.": "工作经验已经创建成功！",
+  "Experience has been saved successfully.": "工作经验已经修改成功！"
 }

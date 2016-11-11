@@ -110,18 +110,17 @@ namespace YuukoResume.Controllers
         [Route("[controller]/Project/Edit/{id}")]
         public async Task<IActionResult> EditProject(long id, Project Model)
         {
-            await DB.Projects
-                .Where(x => x.Id == id)
-                .SetField(x => x.BlobId).WithValue(Model.BlobId)
-                .SetField(x => x.Catalog).WithValue(Model.Catalog)
-                .SetField(x => x.DemoUrl).WithValue(Model.DemoUrl)
-                .SetField(x => x.Description).WithValue(Model.Description)
-                .SetField(x => x.From).WithValue(Model.From)
-                .SetField(x => x.To).WithValue(Model.To)
-                .SetField(x => x.GitHub).WithValue(Model.GitHub)
-                .SetField(x => x.Tags).WithValue(Model.Tags)
-                .SetField(x => x.Title).WithValue(Model.Title)
-                .UpdateAsync();
+            var project = await DB.Projects.SingleAsync(x => x.Id == id);
+            project.BlobId = Model.BlobId;
+            project.Catalog = Model.Catalog;
+            project.DemoUrl = Model.DemoUrl;
+            project.Description = Model.Description;
+            project.From = Model.From;
+            project.To = Model.To;
+            project.GitHub = Model.GitHub;
+            project.Tags = Model.Tags;
+            project.Title = Model.Title;
+            await DB.SaveChangesAsync();
             return Prompt(x =>
             {
                 x.Title = SR["Succeeded"];
@@ -280,6 +279,70 @@ namespace YuukoResume.Controllers
         #endregion
 
         #region Experience Management
+        [HttpGet]
+        [AdminRequired]
+        public async Task<IActionResult> Experience() => View(await DB.Experiences.OrderByDescending(x => x.From).ThenBy(x => x.To).ToListAsync());
+
+        [HttpPost]
+        [AdminRequired]
+        [ValidateAntiForgeryToken]
+        [Route("[controller]/Experience/Remove/{id}")]
+        public async Task<IActionResult> RemoveExperience(long id)
+        {
+            await DB.Experiences
+                .Where(x => x.Id == id)
+                .DeleteAsync();
+            return Prompt(x => 
+            {
+                x.Title = SR["Succeeded"];
+                x.Details = SR["Experience has been removed successfully."];
+            });
+        }
+
+        [HttpGet]
+        [AdminRequired]
+        [Route("[controller]/Experience/Edit/{id}")]
+        public async Task<IActionResult> EditExperience(long id) => View(await DB.Experiences.SingleAsync(x => x.Id == id));
+
+        [HttpPost]
+        [AdminRequired]
+        [ValidateAntiForgeryToken]
+        [Route("[controller]/Experience/Edit/{id}")]
+        public async Task<IActionResult> EditExperience(long id, Experience Model)
+        {
+            var experience = await DB.Experiences.SingleAsync(x => x.Id == id);
+            experience.Company = Model.Company;
+            experience.Description = Model.Description;
+            experience.From = Model.From;
+            experience.To = Model.To;
+            experience.Position = Model.Position;
+            await DB.SaveChangesAsync();
+            return Prompt(x => 
+            {
+                x.Title = SR["Succeeded"];
+                x.Details = SR["Experience has been saved successfully."];
+            });
+        }
+
+        [HttpGet]
+        [AdminRequired]
+        [Route("[controller]/Experience/Create")]
+        public IActionResult CreateExperience() => View();
+
+        [HttpPost]
+        [AdminRequired]
+        [ValidateAntiForgeryToken]
+        [Route("[controller]/Experience/Create")]
+        public async Task<IActionResult> CreateExperience(Experience Model)
+        {
+            DB.Experiences.Add(Model);
+            await DB.SaveChangesAsync();
+            return Prompt(x => 
+            {
+                x.Title = SR["Succeeded"];
+                x.Details = SR["Experience has been created successfully."];
+            });
+        }
         #endregion
     }
 }
