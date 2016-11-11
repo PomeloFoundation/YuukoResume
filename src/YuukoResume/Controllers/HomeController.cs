@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace YuukoResume.Controllers
 {
@@ -10,32 +11,54 @@ namespace YuukoResume.Controllers
     {
         public IActionResult Index()
         {
-            ViewBag.SkillsBar = DB.Skills
-                .Where(x => x.Performance == Models.SkillPerformance.Bar)
-                .OrderByDescending(x => x.Level)
-                .ToList();
-            ViewBag.SkillsCircle = DB.Skills
-                .Where(x => x.Performance == Models.SkillPerformance.Circle)
-                .OrderByDescending(x => x.Level)
-                .ToList();
-            ViewBag.Educations = DB.Educations
-                .OrderByDescending(x => x.From)
-                .ToList();
-            ViewBag.Projects = DB.Projects
-                .GroupBy(x => x.Catalog)
-                .Select(x => new {
-                    Catalog = x.Key,
-                    Projects = x.OrderByDescending(y => y.From)
-                })
-                .OrderBy(x => x.Catalog)
-                .ToList();
-            ViewBag.Experiences = DB.Experiences
-                .OrderByDescending(x => x.From)
-                .ToList();
-            ViewBag.Certificates = DB.Certificates
-                .OrderByDescending(x => x.PRI)
-                .ToList();
-            ViewBag.Profile = DB.Profiles.First();
+            Parallel.Invoke(async ()=> 
+            {
+                ViewBag.SkillsBar = await DB.Skills
+                    .Where(x => x.Performance == Models.SkillPerformance.Bar)
+                    .OrderByDescending(x => x.Level)
+                    .ToListAsync();
+            }, 
+            async ()=>
+            {
+                ViewBag.SkillsCircle = await DB.Skills
+                    .Where(x => x.Performance == Models.SkillPerformance.Circle)
+                    .OrderByDescending(x => x.Level)
+                    .ToListAsync();
+            },
+            async () => 
+            {
+                ViewBag.Educations = await DB.Educations
+                    .OrderByDescending(x => x.From)
+                    .ToListAsync();
+            },
+            async () =>
+            {
+                ViewBag.Projects = await DB.Projects
+                    .GroupBy(x => x.Catalog)
+                    .Select(x => new
+                    {
+                        Catalog = x.Key,
+                        Projects = x.OrderByDescending(y => y.From)
+                    })
+                    .OrderBy(x => x.Catalog)
+                    .ToListAsync();
+            },
+            async () =>
+            {
+                ViewBag.Experiences = await DB.Experiences
+                    .OrderByDescending(x => x.From)
+                    .ToListAsync();
+            },
+            async () =>
+            {
+                ViewBag.Certificates = await DB.Certificates
+                    .OrderByDescending(x => x.PRI)
+                    .ToListAsync();
+            },
+            async () =>
+            {
+                ViewBag.Profile = await DB.Profiles.FirstAsync();
+            });
             return View();
         }
 

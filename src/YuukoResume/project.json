@@ -9,7 +9,7 @@
     "Microsoft.AspNetCore.Mvc": "1.1.0-preview1-final",
     "Microsoft.AspNetCore.Mvc.TagHelpers": "1.1.0-preview1-final",
     "Microsoft.AspNetCore.StaticFiles": "1.1.0-preview1-final",
-    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0-preview1-final",
+    "Microsoft.AspNetCore.Identity": "1.1.0-preview1-final",
     "Microsoft.AspNetCore.Session": "1.1.0-preview1-final",
     "Microsoft.Extensions.Logging.Console": "1.1.0-preview1-final",
     "Microsoft.EntityFrameworkCore.Sqlite": "1.1.0-preview1-final",
