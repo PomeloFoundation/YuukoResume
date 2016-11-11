@@ -34,5 +34,12 @@
   "Age": "年龄",
   "The project has been removed successfully.": "该项目已经成功删除！",
   "Project info has been saved successfully.": "项目信息已成功保存！",
-  "Project info has been created successfully.": "项目信息已成功创建！"
+  "Project info has been created successfully.": "项目信息已成功创建！",
+  "Education information has been created successfully.": "教育经历已成功创建！",
+  "Education information has been removed successfully.": "教育经历已经成功删除！",
+  "Skill has been created successfully.": "技能信息已经创建成功！",
+  "Skill has been removed successfully.": "技能信息已经删除成功！",
+  "Skill has been saved successfully.": "技能信息已经修改成功！",
+  "Certificate has been created successfully.": "证书信息已经创建成功！",
+  "Certificate has been removed successfully.": "证书信息已经删除成功！"
 }
