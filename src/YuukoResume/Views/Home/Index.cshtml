@@ -1,8 +1,9 @@
 ﻿@{
+    Layout = null;
     var CurrentCulture = CultureProvider.DetermineCulture();
-    var Name = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Name[CurrentCulture] : YuukoResume.Startup.Profile.Name.First().Value;
-    var Position = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Position[CurrentCulture] : YuukoResume.Startup.Profile.Position.First().Value;
-    var SelfIntroduce = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.SelfIntroduce[CurrentCulture] : YuukoResume.Startup.Profile.SelfIntroduce.First().Value;
+    var Name = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Name[CurrentCulture] : YuukoResume.Startup.Profile.Name.FirstOrDefault().Value;
+    var Position = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Position[CurrentCulture] : YuukoResume.Startup.Profile.Position.FirstOrDefault().Value;
+    var SelfIntroduce = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.SelfIntroduce[CurrentCulture] : YuukoResume.Startup.Profile.SelfIntroduce.FirstOrDefault().Value;
     var Colors = new[] { "blue", "aqua", "green", "yellow", "red" };
 }
 <!DOCTYPE html>
@@ -12,8 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>@Name - @SR["Curriculum Vitae"]</title>
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
-    <link rel="stylesheet" type="text/css" media="all" href="style/style.css">
-    <link rel="stylesheet" type="text/css" media="all" href="style/responsive.css">
+    <link rel="stylesheet" type="text/css" media="all" href="~/home/style/style.css">
+    <link rel="stylesheet" type="text/css" media="all" href="~/home/style/responsive.css">
     <!--[if lt IE 9]>
         <script src="js/html5.js" type="text/javascript"></script>
     <![endif]-->
@@ -56,7 +57,7 @@
                                         <div id="profile_name">
                                             <h1 id="profile_title"><span class="firstname">@Name</span></h1>
                                             <h4 id="profile_position">Software Development Engineer</h4>
-                                            <h4>@((DateTime.Now - YuukoResume.Startup.Profile.Birthday).TotalDays / 365)岁 / @YuukoResume.Startup.Profile.Telephone / @YuukoResume.Startup.Profile.Email</h4>
+                                            <h4>@((long)(DateTime.Now - YuukoResume.Startup.Profile.Birthday).TotalDays / 365)岁 / @YuukoResume.Startup.Profile.Telephone / @YuukoResume.Startup.Profile.Email</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +88,7 @@
                                     <aside class="widget widget_skills">
                                         <h3 class="widget_title">@SR["Other Skills"]</h3>
                                         <div class="widget_inner style_2">
-                                            @for (var i = 0; i < ViewBag.OtherSkills; i++)
+                                            @for (var i = 0; i < ViewBag.OtherSkills.Count; i++)
                                             {
                                                 <div class="skills_row @(i % 2 == 0 ? "odd" : "even")"><span class="legend @(Colors[i % Colors.Count()])"></span><span class="caption">@ViewBag.OtherSkills[i].Title</span></div>
                                             }
@@ -119,7 +120,7 @@
                                             <h3 class="category_title"><span class="category_title_icon aqua"></span>@SR["Experience"]</h3>
                                         </div>
                                         <div class="category_body resume_category_body">
-                                            @for (var i = 0; i < ViewBag.Experiences; i++)
+                                            @for (var i = 0; i < ViewBag.Experiences.Count; i++)
                                             {
                                                 <article class="post resume_post resume_post_1 @(i == 0 ? "first" : "") @(i % 2 == 0 ? "odd" : "even")">
                                                     <div class="post_header resume_post_header">
@@ -241,14 +242,14 @@
     </div>
     <!-- #page -->
     <!-- connect js -->
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.tools.custom.js"></script>
-    <script type="text/javascript" src="js/jquery.flexslider.min.js"></script>
-    <script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
-    <script type="text/javascript" src="js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="js/jquery.easing.js"></script>
-    <script type="text/javascript" src="js/jquery.reject.js"></script>
-    <script type="text/javascript" src="js/utils.js"></script>
-    <script type="text/javascript" src="js/lib.js"></script>
+    <script type="text/javascript" src="~/home/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/home/js/jquery.tools.custom.js"></script>
+    <script type="text/javascript" src="~/home/js/jquery.flexslider.min.js"></script>
+    <script type="text/javascript" src="~/home/js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="~/home/js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="~/home/js/jquery.easing.js"></script>
+    <script type="text/javascript" src="~/home/js/jquery.reject.js"></script>
+    <script type="text/javascript" src="~/home/js/utils.js"></script>
+    <script type="text/javascript" src="~/home/js/lib.js"></script>
 </body>
 </html>

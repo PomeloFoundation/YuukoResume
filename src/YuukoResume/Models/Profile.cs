@@ -7,8 +7,8 @@ namespace YuukoResume.Models
     public class Profile
     {
         public long Id { get; set; }
-        
-        public Dictionary<string, string> Name { get; set; }
+
+        public Dictionary<string, string> Name { get; set; } = new Dictionary<string, string>();
 
         public DateTime Birthday { get; set; }
 
@@ -16,9 +16,9 @@ namespace YuukoResume.Models
 
         public string Email { get; set; }
 
-        public Dictionary<string, string> SelfIntroduce { get; set; }
+        public Dictionary<string, string> SelfIntroduce { get; set; } = new Dictionary<string, string>();
 
-        public Dictionary<string, string> Position { get; set; }
+        public Dictionary<string, string> Position { get; set; } = new Dictionary<string, string>();
         
         public string GitHubUrl { get; set; }
         

@@ -22,7 +22,7 @@ namespace YuukoResume
             services.AddEntityFrameworkSqlite()
                 .AddDbContext<ResumeContext>(x => 
                 {
-                    x.UseSqlite("resume.db");
+                    x.UseSqlite("Data source=resume.db");
                     x.UseSqliteLolita();
                 });
 
@@ -53,6 +53,7 @@ namespace YuukoResume
             app.UseFrontendLocalizer();
             app.UseDeveloperExceptionPage();
             app.UseMvcWithDefaultRoute();
+            app.ApplicationServices.GetRequiredService<ResumeContext>().Database.Migrate();
         }
     }
 }
