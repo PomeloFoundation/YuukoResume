@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -65,7 +66,7 @@ namespace YuukoResume.Controllers
         [HttpPost]
         [AdminRequired]
         [ValidateAntiForgeryToken]
-        public IActionResult Profile(Profile Model, string _name, string _position, string _selfIntroduce, [FromServices] ICultureProvider cultureProvider)
+        public async Task<IActionResult> Profile(Profile Model, string _name, string _position, string _selfIntroduce, IFormFile Avatar, [FromServices] ICultureProvider cultureProvider)
         {
             var key = cultureProvider.DetermineCulture();
             Model.Name = Startup.Profile.Name;
@@ -80,6 +81,20 @@ namespace YuukoResume.Controllers
             Model.Name.Add(key, _name);
             Model.Position.Add(key, _position);
             Model.SelfIntroduce.Add(key, _selfIntroduce);
+            if (Avatar != null && Avatar.Length > 0)
+            {
+                var blob = new Pomelo.AspNetCore.Extensions.BlobStorage.Models.Blob
+                {
+                    Bytes = await Avatar.ReadAllBytesAsync(),
+                    FileName = Avatar.FileName,
+                    ContentLength = Avatar.Length,
+                    Time = DateTime.Now,
+                    ContentType = Avatar.ContentType
+                };
+                DB.Blobs.Add(blob);
+                DB.SaveChanges();
+                Model.AvatarId = blob.Id;
+            }
             Startup.Profile = Model;
             System.IO.File.WriteAllText("profile.json", JsonConvert.SerializeObject(Model));
             return Prompt(x => 

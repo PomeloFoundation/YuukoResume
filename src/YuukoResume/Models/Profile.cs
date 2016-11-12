@@ -37,5 +37,7 @@ namespace YuukoResume.Models
         public int SmtpPort { get; set; }
 
         public bool SmtpSSL { get; set; }
+
+        public Guid AvatarId { get; set; }
     }
 }

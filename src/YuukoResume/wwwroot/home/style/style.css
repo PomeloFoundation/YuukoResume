@@ -399,7 +399,7 @@ ul.breadcrumbs li:first-child:before { display: none;}
 
 .section_header.opened #profile_data { margin-top: 0;}
 
-#profile_user { overflow: hidden; float: left; width: 100%; max-width: 425px;}
+#profile_user { overflow: hidden; float: left; width: 100%;}
 .blog_page #profile_user { padding-top: 30px;}
 #profile_photo { margin-right: 20px; border: 4px solid #e5e5e5; float: left; width: 87px;
  -webkit-transition: all ease .4s;

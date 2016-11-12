@@ -6,7 +6,7 @@
     var SelfIntroduce = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.SelfIntroduce[CurrentCulture] : YuukoResume.Startup.Profile.SelfIntroduce.FirstOrDefault().Value;
 }
 
-<form asp-action="Profile" asp-controller="Admin" class="row">
+<form asp-action="Profile" asp-controller="Admin" class="row" enctype="multipart/form-data">
     <div class="col-md-10 col-md-offset-1 col-sm-12">
         <div class="card">
             <div class="header">
@@ -15,6 +15,10 @@
             </div>
             <div class="content table-responsive table-full-width">
                 <table class="table table-hover table-striped">
+                    <tr>
+                        <td>@SR["Avatar"]</td>
+                        <td><input type="file" name="Avatar" class="form-control" /></td>
+                    </tr>
                     <tr>
                         <td>@SR["Full Name"]</td>
                         <td><input type="text" name="_name" class="form-control" value="@Name" /></td>
