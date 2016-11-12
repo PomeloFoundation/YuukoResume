@@ -51,5 +51,7 @@
   "YEAR_MONTH_FORMAT": "yyyy.MM",
   "Your profile has been saved successfully.": "您的个人信息已经保存成功！",
   "present": "现在",
-  "{0} years old": "{0}岁"
+  "{0} years old": "{0}岁",
+  "Login": "登录",
+  "Self Introduce": "自我介绍"
 }

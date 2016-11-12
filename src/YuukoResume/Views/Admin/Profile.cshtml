@@ -1,9 +1,13 @@
 ﻿@{ 
     ViewBag.Title = SR["Edit Profile"];
+    var CurrentCulture = CultureProvider.DetermineCulture();
+    var Name = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Name[CurrentCulture] : YuukoResume.Startup.Profile.Name.FirstOrDefault().Value;
+    var Position = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Position[CurrentCulture] : YuukoResume.Startup.Profile.Position.FirstOrDefault().Value;
+    var SelfIntroduce = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.SelfIntroduce[CurrentCulture] : YuukoResume.Startup.Profile.SelfIntroduce.FirstOrDefault().Value;
 }
 
-<form asp-action="Password" asp-controller="Account" class="row">
-    <div class="col-md-8 col-md-offset-2">
+<form asp-action="Profile" asp-controller="Admin" class="row">
+    <div class="col-md-10 col-md-offset-1 col-sm-12">
         <div class="card">
             <div class="header">
                 <h4 class="title">@ViewBag.Title</h4>
@@ -13,15 +17,11 @@
                 <table class="table table-hover table-striped">
                     <tr>
                         <td>@SR["Full Name"]</td>
-                        <td><input type="text" name="Name" class="form-control" value="@YuukoResume.Startup.Profile.Name" /></td>
+                        <td><input type="text" name="_name" class="form-control" value="@Name" /></td>
                     </tr>
                     <tr>
                         <td>@SR["Birthday"]</td>
                         <td><input type="text" name="Birthday" class="datetime form-control" value="@YuukoResume.Startup.Profile.Birthday.ToString(SR["BIRTHDAY_FORMAT"])" /></td>
-                    </tr>
-                    <tr>
-                        <td>@SR["Telephone"]</td>
-                        <td><input type="text" name="Telephone" class="form-control" value="@YuukoResume.Startup.Profile.Telephone" /></td>
                     </tr>
                     <tr>
                         <td>Email</td>
@@ -33,12 +33,12 @@
                     </tr>
                     <tr>
                         <td>@SR["Position"]</td>
-                        <td><input type="text" name="Position" class="form-control" value="@YuukoResume.Startup.Profile.Position" /></td>
+                        <td><input type="text" name="_position" class="form-control" value="@Position" /></td>
                     </tr>
                     <tr>
-                        <td>@SR["SelfIntroduce"]</td>
+                        <td>@SR["Self Introduce"]</td>
                         <td>
-                            <textarea name="SelfIntroduce" style="height: 250px;" class="form-control">@YuukoResume.Startup.Profile.SelfIntroduce</textarea>
+                            <textarea name="_selfIntroduce" style="height: 250px;" class="form-control">@SelfIntroduce</textarea>
                         </td>
                     </tr>
                     <tr>
@@ -71,7 +71,7 @@
                     </tr>
                     <tr>
                         <td>SMTP SSL</td>
-                        <td><input @(YuukoResume.Startup.Profile.SmtpSSL ? "checked" : "") name="SmtpSSL" value="true" /></td>
+                        <td><input type="checkbox" @(YuukoResume.Startup.Profile.SmtpSSL ? "checked" : "") name="SmtpSSL" value="true" /></td>
                     </tr>
                     <tr>
                         <td>@SR["Admin Username"]</td>

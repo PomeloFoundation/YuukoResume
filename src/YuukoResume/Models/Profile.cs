@@ -6,8 +6,6 @@ namespace YuukoResume.Models
 {
     public class Profile
     {
-        public long Id { get; set; }
-
         public Dictionary<string, string> Name { get; set; } = new Dictionary<string, string>();
 
         public DateTime Birthday { get; set; }

@@ -78,8 +78,8 @@ namespace YuukoResume.Controllers
             if (Model.SelfIntroduce.ContainsKey(key))
                 Model.SelfIntroduce.Remove(key);
             Model.Name.Add(key, _name);
-            Model.Position.Add(key, _name);
-            Model.SelfIntroduce.Add(key, _name);
+            Model.Position.Add(key, _position);
+            Model.SelfIntroduce.Add(key, _selfIntroduce);
             Startup.Profile = Model;
             System.IO.File.WriteAllText("profile.json", JsonConvert.SerializeObject(Model));
             return Prompt(x => 

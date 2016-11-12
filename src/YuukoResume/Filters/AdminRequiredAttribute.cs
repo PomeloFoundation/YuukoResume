@@ -9,7 +9,7 @@ namespace YuukoResume.Filters
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            if (context.HttpContext.Session.GetString("Admin") != "true")
+            if (context.HttpContext.Session.GetString("Admin") != "TRUE")
                 context.Result = new RedirectResult("/Admin/Login");
             else
                 base.OnActionExecuting(context);
@@ -17,7 +17,7 @@ namespace YuukoResume.Filters
 
         public override Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            if (context.HttpContext.Session.GetString("Admin") != "true")
+            if (context.HttpContext.Session.GetString("Admin") != "TRUE")
             {
                 context.Result = new RedirectResult("/Admin/Login");
                 return Task.FromResult(0);
