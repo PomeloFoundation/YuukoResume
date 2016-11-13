@@ -1,4 +1,5 @@
 ﻿{
+  "{0} years old": "{0}岁",
   "Admin Panel": "管理员面板",
   "Admin Password": "管理员密码",
   "Admin Username": "管理员用户名",
@@ -26,14 +27,19 @@
   "GitHub Homepage": "GitHub主页",
   "Language Skills": "语言技能",
   "LinkedIn Homepage": "领英主页",
+  "Login": "登录",
+  "Message": "提示信息",
   "Notifications": "系统消息",
   "Other Skills": "其他技能",
   "Position": "职位",
+  "present": "现在",
+  "Prev": "返回上一页",
   "Professional Skills": "专业技能",
   "Project info has been created successfully.": "项目信息已成功创建！",
   "Project info has been saved successfully.": "项目信息已成功保存！",
   "Projects": "项目经验",
   "Save Changes": "保存修改",
+  "Self Introduce": "自我介绍",
   "SENT_TO_EMAIL": "{1} 在 {0} 请求了您的个人简历",
   "Sign Out": "注销登录",
   "Skill": "技能水平",
@@ -49,9 +55,5 @@
   "The project has been removed successfully.": "该项目已经成功删除！",
   "Visitor": "访客记录",
   "YEAR_MONTH_FORMAT": "yyyy.MM",
-  "Your profile has been saved successfully.": "您的个人信息已经保存成功！",
-  "present": "现在",
-  "{0} years old": "{0}岁",
-  "Login": "登录",
-  "Self Introduce": "自我介绍"
+  "Your profile has been saved successfully.": "您的个人信息已经保存成功！"
 }
