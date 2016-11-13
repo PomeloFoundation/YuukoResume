@@ -1,9 +1,9 @@
 ﻿@{
     Layout = null;
     var CurrentCulture = CultureProvider.DetermineCulture();
-    var Name = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Name[CurrentCulture] : YuukoResume.Startup.Profile.Name.FirstOrDefault().Value;
-    var Position = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Position[CurrentCulture] : YuukoResume.Startup.Profile.Position.FirstOrDefault().Value;
-    var SelfIntroduce = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.SelfIntroduce[CurrentCulture] : YuukoResume.Startup.Profile.SelfIntroduce.FirstOrDefault().Value;
+    var Name = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Name[CurrentCulture] : YuukoResume.Startup.Profile.Name.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x.Value)).Value;
+    var Position = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Position[CurrentCulture] : YuukoResume.Startup.Profile.Position.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x.Value)).Value;
+    var SelfIntroduce = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.SelfIntroduce[CurrentCulture] : YuukoResume.Startup.Profile.SelfIntroduce.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x.Value)).Value;
     var Colors = new[] { "blue", "aqua", "green", "yellow", "red" };
 }
 <!DOCTYPE html>
