@@ -206,7 +206,7 @@ namespace YuukoResume.Controllers
             return Prompt(x =>
             {
                 x.Title = SR["Succeeded"];
-                x.Details = SR["Education information has been created successfully."];
+                x.Details = SR["Education experience has been created successfully."];
             });
         }
 
@@ -222,7 +222,7 @@ namespace YuukoResume.Controllers
             return Prompt(x =>
             {
                 x.Title = SR["Succeeded"];
-                x.Details = SR["Education information has been removed successfully."];
+                x.Details = SR["Education experiencehas been removed successfully."];
             });
         }
 
