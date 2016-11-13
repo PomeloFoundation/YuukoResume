@@ -23,7 +23,7 @@ namespace YuukoResume.Controllers
                 .ToListAsync();
         }
 
-        #region Login & Logout
+        #region Login, Logout & Languages
         [HttpGet]
         [GuestOnly]
         public IActionResult Login() => View();
@@ -51,6 +51,13 @@ namespace YuukoResume.Controllers
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
+        }
+
+        [AdminRequired]
+        public IActionResult Language(string id, [FromHeader] string Referer)
+        {
+            Response.Cookies.Append("ASPNET_LANG", id);
+            return Redirect(Referer);
         }
         #endregion
 
