@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Newtonsoft.Json;
 using Pomelo.AspNetCore.Localization;
 using YuukoResume.Models;
@@ -207,6 +206,9 @@ namespace YuukoResume.Controllers
             {
                 x.Title = SR["Succeeded"];
                 x.Details = SR["Education experience has been created successfully."];
+                x.HideBack = true;
+                x.RedirectText = SR["Back To Education List"];
+                x.RedirectUrl = Url.Action("Education", "Admin");
             });
         }
 
@@ -216,13 +218,15 @@ namespace YuukoResume.Controllers
         [Route("[controller]/Education/Remove/{id}")]
         public async Task<IActionResult> RemoveEducation(long id)
         {
-            await DB.Educations
-                .Where(x => x.Id == id)
-                .DeleteAsync();
+            var education = await DB.Educations.SingleAsync(x => x.Id == id);
+            DB.Educations.Remove(education);
+            await DB.SaveChangesAsync();
             return Prompt(x =>
             {
                 x.Title = SR["Succeeded"];
                 x.Details = SR["Education experiencehas been removed successfully."];
+                x.RedirectText = SR["Back To Education List"];
+                x.RedirectUrl = Url.Action("Education", "Admin");
             });
         }
 
@@ -247,6 +251,9 @@ namespace YuukoResume.Controllers
             {
                 x.Title = SR["Succeeded"];
                 x.Details = SR["Education experience has been saved successfully."];
+                x.HideBack = true;
+                x.RedirectText = SR["Back To Education List"];
+                x.RedirectUrl = Url.Action("Education", "Admin");
             });
         }
         #endregion
@@ -254,8 +261,13 @@ namespace YuukoResume.Controllers
         #region Skill Management
         [HttpGet]
         [AdminRequired]
-        public async Task<IActionResult> Skill() => View(await DB.Skills.GroupBy(x => x.Performance).Select(x => new { Performance = x.Key, Skills = x.OrderByDescending(y => y.Level) }).ToListAsync());
-        
+        public async Task<IActionResult> Skill() => View(await DB.Skills.OrderBy(x => x.Performance).ThenByDescending(x => x.Level).ToListAsync());
+
+        [HttpGet]
+        [AdminRequired]
+        [Route("[controller]/Skill/Create")]
+        public IActionResult CreateSkill() => View();
+
         [HttpPost]
         [AdminRequired]
         [ValidateAntiForgeryToken]
@@ -268,6 +280,9 @@ namespace YuukoResume.Controllers
             {
                 x.Title = SR["Succeeded"];
                 x.Details = SR["Skill has been created successfully."];
+                x.HideBack = true;
+                x.RedirectText = SR["Back To Skill List"];
+                x.RedirectUrl = Url.Action("Skill", "Admin");
             });
         }
 
@@ -278,13 +293,16 @@ namespace YuukoResume.Controllers
         [Route("[controller]/Skill/Remove/{id}")]
         public async Task<IActionResult> RemoveSkill(long id)
         {
-            await DB.Skills
-                .Where(x => x.Id == id)
-                .DeleteAsync();
+            var skill = await DB.Skills.SingleAsync(x => x.Id == id);
+            DB.Skills.Remove(skill);
+            await DB.SaveChangesAsync();
             return Prompt(x =>
             {
                 x.Title = SR["Succeeded"];
                 x.Details = SR["Skill has been removed successfully."];
+                x.HideBack = true;
+                x.RedirectText = SR["Back To Skill List"];
+                x.RedirectUrl = Url.Action("Skill", "Admin");
             });
         }
 
@@ -292,16 +310,18 @@ namespace YuukoResume.Controllers
         [AdminRequired]
         [ValidateAntiForgeryToken]
         [Route("[controller]/Skill/Edit/{id}")]
-        public async Task<IActionResult> EditSkill(long id, float level)
+        public async Task<IActionResult> EditSkill(long id, int level)
         {
-            await DB.Skills
-                .Where(x => x.Id == id)
-                .SetField(x => x.Level).WithValue(level)
-                .UpdateAsync();
+            var skill = await DB.Skills.SingleAsync(x => x.Id == id);
+            skill.Level = level;
+            await DB.SaveChangesAsync();
             return Prompt(x => 
             {
                 x.Title = SR["Succeeded"];
                 x.Details = SR["Skill has been saved successfully."];
+                x.HideBack = true;
+                x.RedirectText = SR["Back To Skill List"];
+                x.RedirectUrl = Url.Action("Skill", "Admin");
             });
         }
         #endregion

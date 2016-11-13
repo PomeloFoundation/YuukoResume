@@ -13,7 +13,7 @@
 
         public string Title { get; set; }
 
-        public float Level { get; set; }
+        public int Level { get; set; }
 
         public SkillPerformance Performance { get; set; }
     }

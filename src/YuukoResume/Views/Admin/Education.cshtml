@@ -35,15 +35,13 @@
         </table>
     </div>
 </div>
-<form id="frmRemove" asp-action="RemoveEducation" asp-controller="Admin">
-    <input type="hidden" name="id" id="removeId" />
-</form>
+<form id="frmRemove" asp-action="RemoveEducation" asp-controller="Admin" asp-route-id="NULL"></form>
 <script>
     function remove(id)
     {
         if (confirm("@(new HtmlString(SR["Are you sure you want to remove this?"]))"))
         {
-            $('#removeId').val(id);
+            $('#frmRemove').attr('action', $('#frmRemove').attr('action').replace('NULL', id));
             $('#frmRemove').submit();
         }
     }

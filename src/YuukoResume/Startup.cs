@@ -22,7 +22,6 @@ namespace YuukoResume
                 .AddDbContext<ResumeContext>(x => 
                 {
                     x.UseSqlite("Data source=resume.db");
-                    x.UseSqliteLolita();
                 });
 
             services.AddBlobStorage()

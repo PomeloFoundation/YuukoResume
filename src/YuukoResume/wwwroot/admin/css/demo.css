@@ -63,3 +63,7 @@
 table-full-width {
     margin-bottom: 0;
 }
+
+.modal-backdrop {
+    display: none;
+}
