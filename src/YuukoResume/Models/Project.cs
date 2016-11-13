@@ -8,16 +8,16 @@ namespace YuukoResume.Models
     public class Project
     {
         public long Id { get; set; }
-
-        [MaxLength(128)]
+        
         [Localized]
+        [MaxLength(1024)]
         public string Title { get; set; }
 
         [Localized]
         public string Description { get; set; }
 
         [Localized]
-        [MaxLength(256)]
+        [MaxLength(1024)]
         public string Tags { get; set; }
 
         [MaxLength(256)]
@@ -31,7 +31,7 @@ namespace YuukoResume.Models
         public DateTime? To { get; set; }
 
         [Localized]
-        [MaxLength(128)]
+        [MaxLength(1024)]
         public string Catalog { get; set; }
 
         [ForeignKey("Blob")]

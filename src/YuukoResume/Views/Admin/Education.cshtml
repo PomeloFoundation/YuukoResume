@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Education>
+@{ 
+    ViewBag.Title = SR["Education"];
+}
+
+<div class="card">
+    <div class="header">
+        <h4 class="title">@SR["Education Management"]</h4>
+        <p class="category">@SR["Edit your education experience here, "]<a asp-action="CreateEducation" asp-controller="Admin">@SR["or add a new education experience."]</a></p>
+    </div>
+    <div class="content table-responsive table-full-width">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>@SR["School"]</th>
+                    <th>@SR["Profession"]</th>
+                    <th>@SR["Date"]</th>
+                    <th>@SR["Operations"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in Model)
+                {
+                    <tr>
+                        <td>@x.School</td>
+                        <td>@x.Profession</td>
+                        <td>@SR["From {0} to {1}", x.From.ToString(SR["YEAR_MONTH_FORMAT"]), x.To.HasValue ? x.To.Value.ToString(SR["YEAR_MONTH_FORMAT"]) : SR["present"]]</td>
+                        <td>
+                            <a asp-controller="Admin" asp-action="EditEducation" asp-route-id="@x.Id">@SR["Edit"]</a>
+                            <a href="javascript:remove(@x.Id);">@SR["Remove"]</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<form id="frmRemove" asp-action="RemoveEducation" asp-controller="Admin">
+    <input type="hidden" name="id" id="removeId" />
+</form>
+<script>
+    function remove(id)
+    {
+        if (confirm("@(new HtmlString(SR["Are you sure you want to remove this?"]))"))
+        {
+            $('#removeId').val(id);
+            $('#frmRemove').submit();
+        }
+    }
+</script>

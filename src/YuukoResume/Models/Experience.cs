@@ -11,11 +11,11 @@ namespace YuukoResume.Models
         public long Id { get; set; }
 
         [Localized]
-        [MaxLength(128)]
+        [MaxLength(512)]
         public string Company { get; set; }
 
         [Localized]
-        [MaxLength(128)]
+        [MaxLength(512)]
         public string Position { get; set; }
 
         [Localized]

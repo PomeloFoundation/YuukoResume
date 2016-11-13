@@ -7,7 +7,8 @@ namespace YuukoResume.Models
     {
         public long Id { get; set; }
 
-        [MaxLength(64)]
+        [Localized]
+        [MaxLength(512)]
         public string School { get; set; }
 
         [Localized]

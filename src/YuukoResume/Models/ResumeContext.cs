@@ -1,12 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Pomelo.AspNetCore.Extensions.BlobStorage.Models;
 
 namespace YuukoResume.Models
 {
     public class ResumeContext : DbContext, IBlobStorageDbContext
     {
-        public ResumeContext(DbContextOptions opt) : base(opt)
+        private IServiceProvider services;
+        public ResumeContext(IServiceProvider services, DbContextOptions opt) : base(opt)
         {
+            this.services = services;
         }
 
         public DbSet<Blob> Blobs { get; set; }
@@ -16,6 +20,12 @@ namespace YuukoResume.Models
         public DbSet<Log> Logs { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Skill> Skills { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseInternalServiceProvider(services);
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

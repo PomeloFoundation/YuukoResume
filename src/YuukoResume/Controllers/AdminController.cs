@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Newtonsoft.Json;
 using Pomelo.AspNetCore.Localization;
 using YuukoResume.Models;
@@ -188,13 +189,19 @@ namespace YuukoResume.Controllers
         [AdminRequired]
         public async Task<IActionResult> Education() => View(await DB.Educations.OrderByDescending(x => x.From).ThenBy(x => x.To).ToListAsync());
 
+        [HttpGet]
+        [AdminRequired]
+        [Route("[controller]/Education/Create")]
+        public IActionResult CreateEducation() => View();
+
         [HttpPost]
         [AdminRequired]
         [ValidateAntiForgeryToken]
         [Route("[controller]/Education/Create")]
-        public async Task<IActionResult> CreateEducation(Education Model)
+        public async Task<IActionResult> CreateEducation(Education Model, [FromServices] ResumeContext DB)
         {
             DB.Educations.Add(Model);
+            var entry = DB.Entry(Model);
             await DB.SaveChangesAsync();
             return Prompt(x =>
             {
@@ -216,6 +223,30 @@ namespace YuukoResume.Controllers
             {
                 x.Title = SR["Succeeded"];
                 x.Details = SR["Education information has been removed successfully."];
+            });
+        }
+
+        [HttpGet]
+        [AdminRequired]
+        [Route("[controller]/Education/Edit/{id}")]
+        public async Task<IActionResult> EditEducation(long id) => View(await DB.Educations.SingleAsync(x => x.Id == id));
+        
+        [HttpPost]
+        [AdminRequired]
+        [ValidateAntiForgeryToken]
+        [Route("[controller]/Education/Edit/{id}")]
+        public async Task<IActionResult> EditEducation(long id, Education Model)
+        {
+            var education = await DB.Educations.SingleAsync(x => x.Id == id);
+            education.From = Model.From;
+            education.Profession = Model.Profession;
+            education.School = Model.School;
+            education.To = Model.To;
+            await DB.SaveChangesAsync();
+            return Prompt(x => 
+            {
+                x.Title = SR["Succeeded"];
+                x.Details = SR["Education experience has been saved successfully."];
             });
         }
         #endregion

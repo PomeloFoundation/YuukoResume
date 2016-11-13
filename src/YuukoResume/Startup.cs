@@ -18,9 +18,6 @@ namespace YuukoResume
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                .AddViewLocalization();
-
             services.AddEntityFrameworkSqlite()
                 .AddDbContext<ResumeContext>(x => 
                 {
@@ -36,6 +33,8 @@ namespace YuukoResume
             services.AddSession(x => x.IdleTimeout = new TimeSpan(1, 0, 0));
 
             services.AddSmartCookies();
+
+            services.AddMvc();
 
             services.AddPomeloLocalization(x =>
             {
@@ -53,9 +52,9 @@ namespace YuukoResume
             app.UseBlobStorage();
             app.UseStaticFiles();
             app.UseSession();
-            app.UseFrontendLocalizer();
             app.UseDeveloperExceptionPage();
             app.UseMvcWithDefaultRoute();
+            app.UseFrontendLocalizer();
             app.ApplicationServices.GetRequiredService<ResumeContext>().Database.Migrate();
         }
     }

@@ -1,0 +1,38 @@
+﻿@model Education
+@{ 
+    ViewBag.Title = SR["Edit Education Experience"];
+}
+
+<form asp-action="EditEducation" asp-controller="Admin" class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">@ViewBag.Title</h4>
+                <p class="category">@SR["Modify the following form, and it will be changed after clicking submit button."]</p>
+            </div>
+            <div class="content table-responsive table-full-width">
+                <table class="table table-hover table-striped">
+                    <tr>
+                        <td>@SR["School"]</td>
+                        <td><input type="text" asp-for="School" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["Profession"]</td>
+                        <td><input type="text" asp-for="Profession" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["From"]</td>
+                        <td><input type="text" asp-for="From" class="form-control datetime" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["To"]</td>
+                        <td><input type="text" asp-for="To" class="form-control datetime" /></td>
+                    </tr>
+                </table>
+                <p style="text-align: center">
+                    <input type="submit" class="btn btn-danger" value="@SR["Submit"]" />
+                </p>
+            </div>
+        </div>
+    </div>
+</form>
