@@ -431,7 +431,7 @@ h1#profile_title .firstname { text-transform: uppercase;}
 #mainpage_accordion_area .post_header .resume_period .period_present { font-size: 14px;}
 #mainpage_accordion_area .post_header .post_title { overflow: hidden; font-size: 18px; line-height: 22px; color: #373737; font-weight: 700; padding-left: 22px; margin-bottom: 1px; position: relative;}
 #mainpage_accordion_area .post_header .post_title .post_title_icon { position: absolute; width: 15px; height: 15px; background-image: url(../images/post_title_icon.png); background-repeat: no-repeat; background-position: 5px 3px; top: 4px; left: 0; border-radius: 15px;}
-#mainpage_accordion_area .post_header .post_subtitle { font-size: 14px; line-height: 18px; color: #9b9b9b; padding-left: 23px; text-transform: capitalize; margin-bottom: 0;}
+#mainpage_accordion_area .post_header .post_subtitle { font-size: 14px; line-height: 18px; color: #9b9b9b; text-transform: capitalize; margin-bottom: 0;}
 
 h3.category_title { position: relative; background: #373737; font-size: 14px; line-height: 18px; color: #fff; text-transform: uppercase; padding: 5px 10px 7px 39px; font-weight: 700; border-radius: 4px 0 0 4px;}
 h3.category_title a { color:#ffffff; text-decoration:none;}
@@ -1159,7 +1159,13 @@ div.sc_googlemap .map-canvas { min-width:100px; min-height:100px;}
 }
 
 .resume_post_body p {
-  padding-left: 22px;
+    line-height: 22px;
+}
+
+.resume_post_body h3 {
+    line-height: 20px;
+    padding-top: 10px;
+    font-weight: bold;
 }
 
 .social_links a {
