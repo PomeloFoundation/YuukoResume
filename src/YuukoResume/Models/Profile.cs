@@ -27,15 +27,15 @@ namespace YuukoResume.Models
         
         public string Password { get; set; }
         
-        public string SmtpServer { get; set; }
+        //public string SmtpServer { get; set; }
         
-        public string SmtpUsername { get; set; }
+        //public string SmtpUsername { get; set; }
         
-        public string SmtpPassword { get; set; }
+        //public string SmtpPassword { get; set; }
 
-        public int SmtpPort { get; set; }
+        //public int SmtpPort { get; set; }
 
-        public bool SmtpSSL { get; set; }
+        //public bool SmtpSSL { get; set; }
 
         public Guid AvatarId { get; set; }
     }
