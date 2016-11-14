@@ -1,19 +1,21 @@
-﻿@model IEnumerable<Education>
+﻿@model IEnumerable<Project>
 @{ 
-    ViewBag.Title = SR["Education"];
+    ViewBag.Title = SR["Project"];
 }
 
 <div class="card">
     <div class="header">
-        <h4 class="title">@SR["Education Management"]</h4>
-        <p class="category">@SR["Edit your education experience here, "]<a asp-action="CreateEducation" asp-controller="Admin">@SR["or add a new education experience."]</a></p>
+        <h4 class="title">@SR["Project Management"]</h4>
+        <p class="category">@SR["Edit your project here, "]<a asp-action="CreateProject" asp-controller="Admin">@SR["or add a new project."]</a></p>
     </div>
     <div class="content table-responsive table-full-width">
         <table class="table table-hover table-striped">
             <thead>
                 <tr>
-                    <th>@SR["School"]</th>
-                    <th>@SR["Profession"]</th>
+                    <th>@SR["Project Name"]</th>
+                    <th>@SR["Tags"]</th>
+                    <th>GitHub</th>
+                    <th>Demo URL</th>
                     <th>@SR["Duration"]</th>
                     <th>@SR["Operations"]</th>
                 </tr>
@@ -22,11 +24,13 @@
                 @foreach (var x in Model)
                 {
                     <tr>
-                        <td>@x.School</td>
-                        <td>@x.Profession</td>
+                        <td>@x.Title</td>
+                        <td>@x.Tags</td>
+                        <td>@x.GitHub</td>
+                        <td>@x.DemoUrl</td>
                         <td>@SR["From {0} to {1}", x.From.ToString(SR["YEAR_MONTH_FORMAT"]), x.To.HasValue ? x.To.Value.ToString(SR["YEAR_MONTH_FORMAT"]) : SR["present"]]</td>
                         <td>
-                            <a asp-controller="Admin" asp-action="EditEducation" asp-route-id="@x.Id">@SR["Edit"]</a>
+                            <a asp-controller="Admin" asp-action="EditProject" asp-route-id="@x.Id">@SR["Edit"]</a>
                             <a href="javascript:remove(@x.Id);">@SR["Remove"]</a>
                         </td>
                     </tr>
@@ -35,7 +39,7 @@
         </table>
     </div>
 </div>
-<form id="frmRemove" asp-action="RemoveEducation" asp-controller="Admin" asp-route-id="NULL"></form>
+<form id="frmRemove" asp-action="RemoveProject" asp-controller="Admin" asp-route-id="NULL"></form>
 <script>
     function remove(id)
     {

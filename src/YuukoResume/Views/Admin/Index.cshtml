@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     ViewBag.Title = SR["Dashboard"];
     var CurrentCulture = CultureProvider.DetermineCulture();
     var Name = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Name[CurrentCulture] : YuukoResume.Startup.Profile.Name.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x.Value)).Value;
@@ -6,75 +6,76 @@
     var SelfIntroduce = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.SelfIntroduce[CurrentCulture] : YuukoResume.Startup.Profile.SelfIntroduce.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x.Value)).Value;
 }
 
-<form asp-action="Profile" asp-controller="Admin" class="row">
-    <div class="col-md-10 col-md-offset-1 col-sm-12">
-        <div class="card">
-            <div class="header">
-                <h4 class="title">@ViewBag.Title</h4>
-            </div>
-            <div class="content table-responsive table-full-width">
-                <table class="table table-hover table-striped">
-                    <tr>
-                        <td>@SR["Full Name"]</td>
-                        <td>@Name</td>
-                    </tr>
-                    <tr>
-                        <td>@SR["Age"]</td>
-                        <td>@((DateTime.Now - YuukoResume.Startup.Profile.Birthday).TotalDays / 365)</td>
-                    </tr>
-                    <tr>
-                        <td>@SR["Telephone"]</td>
-                        <td>@YuukoResume.Startup.Profile.Telephone</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>@YuukoResume.Startup.Profile.Email</td>
-                    </tr>
-                    <tr>
-                        <td>@SR["Position"]</td>
-                        <td>@Position</td>
-                    </tr>
-                    <tr>
-                        <td>@SR["Self Introduce"]</td>
-                        <td>@SelfIntroduce</td>
-                    </tr>
-                    <tr>
-                        <td>@SR["GitHub Homepage"]</td>
-                        <td>@YuukoResume.Startup.Profile.GitHubUrl</td>
-                    </tr>
-                    <tr>
-                        <td>@SR["LinkedIn Homepage"]</td>
-                        <td>@YuukoResume.Startup.Profile.LinkedInUrl</td>
-                    </tr>
-                    <tr>
-                        <td>@SR["Blog URL"]</td>
-                        <td>@YuukoResume.Startup.Profile.BlogUrl</td>
-                    </tr>
-                    <tr>
-                        <td>@SR["SMTP Host"]</td>
-                        <td>@YuukoResume.Startup.Profile.SmtpServer</td>
-                    </tr>
-                    <tr>
-                        <td>@SR["SMTP Port"]</td>
-                        <td>@YuukoResume.Startup.Profile.SmtpPort</td>
-                    </tr>
-                    <tr>
-                        <td>@SR["SMTP Username"]</td>
-                        <td>@YuukoResume.Startup.Profile.SmtpUsername</td>
-                    </tr>
-                    <tr>
-                        <td>@SR["SMTP Password"]</td>
-                        <td>@YuukoResume.Startup.Profile.SmtpPassword</td>
-                    </tr>
-                    <tr>
-                        <td>SMTP SSL</td>
-                        <td>@YuukoResume.Startup.Profile.SmtpSSL</td>
-                    </tr>
-                </table>
-                <p style="text-align: center">
-                    <a asp-action="Profile" asp-controller="Admin" class="btn btn-primary">@SR["Edit Profile"]</a>
-                </p>
-            </div>
+<div class="col-md-2">
+    <img style="width: 100%;" src="/file/download/@YuukoResume.Startup.Profile.AvatarId" />
+</div>
+<div class="col-md-10">
+    <div class="card">
+        <div class="header">
+            <h4 class="title">@ViewBag.Title</h4>
+        </div>
+        <div class="content table-responsive table-full-width">
+            <table class="table table-hover table-striped">
+                <tr>
+                    <td>@SR["Full Name"]</td>
+                    <td>@Name</td>
+                </tr>
+                <tr>
+                    <td>@SR["Age"]</td>
+                    <td>@((DateTime.Now - YuukoResume.Startup.Profile.Birthday).TotalDays / 365)</td>
+                </tr>
+                <tr>
+                    <td>@SR["Telephone"]</td>
+                    <td>@YuukoResume.Startup.Profile.Telephone</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>@YuukoResume.Startup.Profile.Email</td>
+                </tr>
+                <tr>
+                    <td>@SR["Position"]</td>
+                    <td>@Position</td>
+                </tr>
+                <tr>
+                    <td>@SR["Self Introduce"]</td>
+                    <td>@SelfIntroduce</td>
+                </tr>
+                <tr>
+                    <td>@SR["GitHub Homepage"]</td>
+                    <td>@YuukoResume.Startup.Profile.GitHubUrl</td>
+                </tr>
+                <tr>
+                    <td>@SR["LinkedIn Homepage"]</td>
+                    <td>@YuukoResume.Startup.Profile.LinkedInUrl</td>
+                </tr>
+                <tr>
+                    <td>@SR["Blog URL"]</td>
+                    <td>@YuukoResume.Startup.Profile.BlogUrl</td>
+                </tr>
+                <tr>
+                    <td>@SR["SMTP Host"]</td>
+                    <td>@YuukoResume.Startup.Profile.SmtpServer</td>
+                </tr>
+                <tr>
+                    <td>@SR["SMTP Port"]</td>
+                    <td>@YuukoResume.Startup.Profile.SmtpPort</td>
+                </tr>
+                <tr>
+                    <td>@SR["SMTP Username"]</td>
+                    <td>@YuukoResume.Startup.Profile.SmtpUsername</td>
+                </tr>
+                <tr>
+                    <td>@SR["SMTP Password"]</td>
+                    <td>@YuukoResume.Startup.Profile.SmtpPassword</td>
+                </tr>
+                <tr>
+                    <td>SMTP SSL</td>
+                    <td>@YuukoResume.Startup.Profile.SmtpSSL</td>
+                </tr>
+            </table>
+            <p style="text-align: center">
+                <a asp-action="Profile" asp-controller="Admin" class="btn btn-primary">@SR["Edit Profile"]</a>
+            </p>
         </div>
     </div>
-</form>
+</div>

@@ -210,7 +210,7 @@ blockquote.sc_quote .quotes:before { display: inline-block; padding-top: 5px; co
 #page { overflow: hidden; width: 940px; margin: 0 auto; /*padding-top: 37px;*/}
 
 /*  Header  */
-#header { overflow: hidden; margin-bottom: 21px;}
+#header { overflow: hidden; margin-bottom: 11px;}
 
  /* Social Links Top*/
 #header .social_links { padding-top: 20px; float: right; margin-right: 57px; overflow: hidden; }
@@ -1171,4 +1171,23 @@ div.sc_googlemap .map-canvas { min-width:100px; min-height:100px;}
 
 .social_links a:hover {
   color: #999;
+}
+
+.languages {
+    float: left;
+    margin-left: 57px;
+    padding-top: 20px;
+}
+
+.languages img {
+    width: 18.86px!important;
+    height: 18.86px!important;
+    margin-right: 5px;
+}
+
+.label-language {
+    margin-right: 7px;
+    float:left;
+    font-size: 14px;
+    line-height: 18.86px;
 }

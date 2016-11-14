@@ -1,7 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Pomelo.AspNetCore.Extensions.BlobStorage.Models;
 
 namespace YuukoResume.Models
 {
@@ -33,10 +31,5 @@ namespace YuukoResume.Models
         [Localized]
         [MaxLength(1024)]
         public string Catalog { get; set; }
-
-        [ForeignKey("Blob")]
-        public Guid BlobId { get; set; }
-
-        public virtual Blob Blob { get; set; }
     }
 }

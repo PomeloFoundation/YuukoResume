@@ -1,6 +1,7 @@
 ﻿{
   "BIRTHDAY_FORMAT": "MM/dd/yyyy",
   "DATE_FORMAT": "MM/dd/yyyy HH:mm",
+  "Profile2": "Profile",
   "SENT_TO_EMAIL": "{1} Requested your CV at {0}",
   "YEAR_MONTH_FORMAT": "MMM yyyy"
 }

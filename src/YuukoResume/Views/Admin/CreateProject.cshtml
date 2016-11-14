@@ -1,0 +1,62 @@
+﻿@{ 
+    ViewBag.Title = SR["Create Project Case"];
+}
+<script src="~/admin/js/jquery.pomelo.fileupload.js"></script>
+<script src="~/admin/js/markdown.js"></script>
+<form asp-action="CreateProject" asp-controller="Admin" class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">@ViewBag.Title</h4>
+                <p class="category">@SR["Fill the following form, and it will be shown in your resume."]</p>
+            </div>
+            <div class="content table-responsive table-full-width">
+                <table class="table table-hover table-striped">
+                    <tr>
+                        <td>@SR["Project Name"]</td>
+                        <td><input type="text" name="Title" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["Catalog"]</td>
+                        <td><input type="text" name="Catalog" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["Tags"]</td>
+                        <td><input type="text" name="Tags" class="form-control" placeholder="@SR["By using ',' to split tags."]" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["From"]</td>
+                        <td><input type="text" name="From" class="form-control datetime" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["To"]</td>
+                        <td><input type="text" name="To" class="form-control datetime" /></td>
+                    </tr>
+                    <tr>
+                        <td>Demo URL</td>
+                        <td><input type="text" name="DemoUrl" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>GitHub</td>
+                        <td><input type="text" name="GitHub" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>@SR["Description"]</td>
+                        <td>
+                            <div class="markdown-textbox-outer">
+                                <textarea id="txtContent" class="markdown-textbox" name="Description" placeholder="@SR["Markdown has been supported..."]"></textarea>
+                                <div class="markdown-textbox-bottom">@SR["Attach files by dragging & dropping, "]<a href="javascript:uploadAttachment();">@SR["selecting them"]</a>@SR["or pasting from the clipboard."]</div>
+                            </div>    
+                        </td>
+                    </tr>
+                </table>
+                <p style="text-align: center">
+                    <input type="submit" class="btn btn-danger" value="@SR["Submit"]" />
+                </p>
+            </div>
+        </div>
+    </div>
+</form>
+<form id="frmAjaxUpload">
+    <input type="file" id="uploadFile" name="file" />
+</form>

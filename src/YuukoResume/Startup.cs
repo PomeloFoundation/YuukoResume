@@ -48,7 +48,7 @@ namespace YuukoResume
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole();
-            app.UseBlobStorage();
+            app.UseBlobStorage("/admin/js/jquery.pomelo.fileupload.js");
             app.UseStaticFiles();
             app.UseSession();
             app.UseDeveloperExceptionPage();

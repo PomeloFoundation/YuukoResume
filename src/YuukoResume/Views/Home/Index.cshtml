@@ -30,6 +30,11 @@
     </div>
     <div class="hfeed site" id="page">
         <header role="banner" class="site_header" id="header">
+            <div class="languages">
+                <span class="label-language">@SR["Language"]</span>
+                <a asp-action="Language" asp-controller="Home" asp-route-id="en"><img src="~/home/images/en.png" /></a>
+                <a asp-action="Language" asp-controller="Home" asp-route-id="zh"><img src="~/home/images/zh.png" /></a>
+            </div>
             <div class="social_links">
                 <ul>
                     @if (!string.IsNullOrWhiteSpace(YuukoResume.Startup.Profile.LinkedInUrl))
@@ -49,7 +54,7 @@
                     <section class="section profile_section first odd" id="profile">
                         <a id="blog_page_link" href="@(string.IsNullOrWhiteSpace(YuukoResume.Startup.Profile.BlogUrl) ? "#" : YuukoResume.Startup.Profile.BlogUrl)"><span class="icon-pencil icon"></span><span class="label">Blog</span></a>
                         <div class="section_header profile_section_header opened">
-                            <h2 class="section_title profile_section_title vis"><a href="#"><span class="icon icon-user"></span><span class="section_name">Profile</span></a><span class="section_icon"></span></h2>
+                            <h2 class="section_title profile_section_title vis"><a href="#"><span class="icon icon-user"></span><span class="section_name">@SR["Profile"]</span></a><span class="section_icon"></span></h2>
                             <div id="profile_header">
                                 <div id="profile_user">
                                     <div id="profile_photo"><img src="~/file/download/@YuukoResume.Startup.Profile.AvatarId" /></div>
@@ -72,7 +77,7 @@
                         <!-- RESUME -->
                         <section class="section resume_section even" id="resume">
                             <div class="section_header resume_section_header">
-                                <h2 class="section_title resume_section_title"><a href="#"><span class="icon icon-align-left"></span><span class="section_name">Resume</span></a><span class="section_icon"></span></h2>
+                                <h2 class="section_title resume_section_title"><a href="#"><span class="icon icon-align-left"></span><span class="section_name">@SR["Resume"]</span></a><span class="section_icon"></span></h2>
                             </div>
                             <div class="section_body resume_section_body">
                                 <div class="sidebar resume_sidebar">
@@ -117,7 +122,7 @@
                                 <div class="wrapper resume_wrapper">
                                     <div class="category resume_category resume_category_1 first even">
                                         <div class="category_header resume_category_header">
-                                            <h3 class="category_title"><span class="category_title_icon aqua"></span>@SR["Experience"]</h3>
+                                            <h3 class="category_title"><span class="category_title_icon aqua"></span>@SR["Working Experience"]</h3>
                                         </div>
                                         <div class="category_body resume_category_body">
                                             @for (var i = 0; i < ViewBag.Experiences.Count; i++)
@@ -165,15 +170,15 @@
                         <!-- PORTFOLIO -->
                         <section class="section portfolio_section odd" id="portfolio">
                             <div class="section_header portfolio_section_header">
-                                <h2 class="section_title portfolio_section_title"><a href="#"><span class="icon icon-briefcase"></span><span class="section_name">Portfolio</span></a><span class="section_icon"></span></h2>
+                                <h2 class="section_title portfolio_section_title"><a href="#"><span class="icon icon-briefcase"></span><span class="section_name">@SR["Portfolio"]</span></a><span class="section_icon"></span></h2>
                             </div>
                             <div class="section_body portfolio_section_body">
                                 <div class="wrapper resume_wrapper">
                                     @foreach (GroupedProject group in ViewBag.Projects)
                                     {
-                                        <div class="category">
+                                        <div class="category @(ViewBag.Projects[0] == group ? "first" : "")">
                                             <div class="category_header resume_category_header">
-                                                <h3 class="category_title"><span class="category_title_icon red"></span>@group.Catalog</h3>
+                                                <h3 class="category_title"><span class="category_title_icon yellow"></span>@group.Catalog</h3>
                                             </div>
                                             <div class="category_body resume_category_body">
                                                 @for (var i = 0; i < group.Projects.Count(); i++)
@@ -181,11 +186,11 @@
                                                     <article class="post resume_post resume_post_@i @(i == 0 ? "first" : "") @(i % 2 == 0 ? "odd" : "even")">
                                                         <div class="post_header resume_post_header">
                                                             <div class="resume_period"> <span class="period_from">@group.Projects.ElementAt(i).From.ToString(SR["YEAR_MONTH_FORMAT"])</span> - <span class="period_to">@(group.Projects.ElementAt(i).To == null ? SR["present"] : group.Projects.ElementAt(i).To.Value.ToString(SR["YEAR_MONTH_FORMAT"]))</span></div>
-                                                            <h4 class="post_title"><span class="post_title_icon red"></span><a href="#">Pomelo.EntityFrameworkCore.MySql</a></h4>
+                                                            <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">@group.Projects.ElementAt(i).Title</a></h4>
                                                             <h5 class="post_subtitle">
                                                                 @if (!string.IsNullOrWhiteSpace(group.Projects.ElementAt(i).Tags))
                                                                 {
-                                                                    <i class="icon icon-tags"></i>@group.Projects.ElementAt(i).Tags
+                                                                    <i class="icon icon-tags"></i> @group.Projects.ElementAt(i).Tags
                                                                 }
                                                                 @if (!string.IsNullOrWhiteSpace(group.Projects.ElementAt(i).GitHub))
                                                                 {
@@ -216,7 +221,7 @@
                         <!-- CONTACTS -->
                         <section class="section contact_section even" id="contact">
                             <div class="section_header contact_section_header">
-                                <h2 class="section_title contact_section_title"><a href="#"><span class="icon icon-certificate"></span><span class="section_name">Certificates</span></a><span class="section_icon"></span></h2>
+                                <h2 class="section_title contact_section_title"><a href="#"><span class="icon icon-certificate"></span><span class="section_name">@SR["Certificates"]</span></a><span class="section_icon"></span></h2>
                             </div>
                             <div class="section_body contact_section_body certificates">
                                 @foreach (Certificate x in ViewBag.Certificates)

@@ -32,7 +32,7 @@ namespace YuukoResume.Controllers
                 .Select(x => new GroupedProject
                 {
                     Catalog = x.Key,
-                    Projects = x.OrderByDescending(y => y.From)
+                    Projects = x.OrderByDescending(y => y.From).ToList()
                 })
                 .OrderBy(x => x.Catalog)
                 .ToListAsync();

@@ -49,8 +49,8 @@
                 <ul class="nav">
                     <li>
                         <a asp-action="Index" asp-controller="Admin">
-                            <i class="pe-7s-graph"></i>
-                            <p>@SR["Dashboard"]</p>
+                            <i class="pe-7s-user"></i>
+                            <p>@SR["Profile2"]</p>
                         </a>
                     </li>
                     <li>
@@ -62,7 +62,7 @@
                     <li>
                         <a asp-action="Experience" asp-controller="Admin">
                             <i class="pe-7s-portfolio"></i>
-                            <p>@SR["Experience"]</p>
+                            <p>@SR["Working Experience"]</p>
                         </a>
                     </li>
                     <li>
@@ -85,8 +85,8 @@
                     </li>
                     <li>
                         <a asp-action="Visitor" asp-controller="Admin">
-                            <i class="pe-7s-look"></i>
-                            <p>@SR["Visitor"]</p>
+                            <i class="pe-7s-like"></i>
+                            <p>@SR["Download Log"]</p>
                         </a>
                     </li>
                     <li>
@@ -139,6 +139,12 @@
                                 }
                             </li>
                         </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a asp-action="Language" asp-controller="Admin" asp-route-id="en">English</a></li>
+                            <li><a asp-action="Language" asp-controller="Admin" asp-route-id="zh">简体中文</a></li>
+                        </ul>
+
                     </div>
                 </div>
             </nav>

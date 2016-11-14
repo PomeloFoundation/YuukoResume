@@ -8,7 +8,7 @@ using YuukoResume.Models;
 namespace YuukoResume.Migrations
 {
     [DbContext(typeof(ResumeContext))]
-    [Migration("20161111125434_Init")]
+    [Migration("20161114025059_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,7 +73,7 @@ namespace YuukoResume.Migrations
                     b.Property<string>("Profession");
 
                     b.Property<string>("School")
-                        .HasMaxLength(64);
+                        .HasMaxLength(512);
 
                     b.Property<DateTime?>("To");
 
@@ -90,14 +90,14 @@ namespace YuukoResume.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Company")
-                        .HasMaxLength(128);
+                        .HasMaxLength(512);
 
                     b.Property<string>("Description");
 
                     b.Property<DateTime>("From");
 
                     b.Property<string>("Position")
-                        .HasMaxLength(128);
+                        .HasMaxLength(512);
 
                     b.Property<DateTime?>("To");
 
@@ -133,10 +133,8 @@ namespace YuukoResume.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("BlobId");
-
                     b.Property<string>("Catalog")
-                        .HasMaxLength(128);
+                        .HasMaxLength(1024);
 
                     b.Property<string>("DemoUrl")
                         .HasMaxLength(256);
@@ -149,16 +147,14 @@ namespace YuukoResume.Migrations
                         .HasMaxLength(256);
 
                     b.Property<string>("Tags")
-                        .HasMaxLength(256);
+                        .HasMaxLength(1024);
 
                     b.Property<string>("Title")
-                        .HasMaxLength(128);
+                        .HasMaxLength(1024);
 
                     b.Property<DateTime?>("To");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BlobId");
 
                     b.HasIndex("From");
 
@@ -170,7 +166,7 @@ namespace YuukoResume.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<float>("Level");
+                    b.Property<int>("Level");
 
                     b.Property<int>("Performance");
 
@@ -186,14 +182,6 @@ namespace YuukoResume.Migrations
                 });
 
             modelBuilder.Entity("YuukoResume.Models.Certificate", b =>
-                {
-                    b.HasOne("Pomelo.AspNetCore.Extensions.BlobStorage.Models.Blob", "Blob")
-                        .WithMany()
-                        .HasForeignKey("BlobId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("YuukoResume.Models.Project", b =>
                 {
                     b.HasOne("Pomelo.AspNetCore.Extensions.BlobStorage.Models.Blob", "Blob")
                         .WithMany()

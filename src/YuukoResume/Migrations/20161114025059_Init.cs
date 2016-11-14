@@ -32,7 +32,7 @@ namespace YuukoResume.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     From = table.Column<DateTime>(nullable: false),
                     Profession = table.Column<string>(nullable: true),
-                    School = table.Column<string>(maxLength: 64, nullable: true),
+                    School = table.Column<string>(maxLength: 512, nullable: true),
                     To = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
@@ -46,10 +46,10 @@ namespace YuukoResume.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Company = table.Column<string>(maxLength: 128, nullable: true),
+                    Company = table.Column<string>(maxLength: 512, nullable: true),
                     Description = table.Column<string>(nullable: true),
                     From = table.Column<DateTime>(nullable: false),
-                    Position = table.Column<string>(maxLength: 128, nullable: true),
+                    Position = table.Column<string>(maxLength: 512, nullable: true),
                     To = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
@@ -72,12 +72,32 @@ namespace YuukoResume.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Projects",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Catalog = table.Column<string>(maxLength: 1024, nullable: true),
+                    DemoUrl = table.Column<string>(maxLength: 256, nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    From = table.Column<DateTime>(nullable: false),
+                    GitHub = table.Column<string>(maxLength: 256, nullable: true),
+                    Tags = table.Column<string>(maxLength: 1024, nullable: true),
+                    Title = table.Column<string>(maxLength: 1024, nullable: true),
+                    To = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projects", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Skills",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Level = table.Column<float>(nullable: false),
+                    Level = table.Column<int>(nullable: false),
                     Performance = table.Column<int>(nullable: false),
                     Title = table.Column<string>(nullable: true)
                 },
@@ -101,33 +121,6 @@ namespace YuukoResume.Migrations
                     table.PrimaryKey("PK_Certificates", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Certificates_Blobs_BlobId",
-                        column: x => x.BlobId,
-                        principalTable: "Blobs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Projects",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    BlobId = table.Column<Guid>(nullable: false),
-                    Catalog = table.Column<string>(maxLength: 128, nullable: true),
-                    DemoUrl = table.Column<string>(maxLength: 256, nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    From = table.Column<DateTime>(nullable: false),
-                    GitHub = table.Column<string>(maxLength: 256, nullable: true),
-                    Tags = table.Column<string>(maxLength: 256, nullable: true),
-                    Title = table.Column<string>(maxLength: 128, nullable: true),
-                    To = table.Column<DateTime>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Projects", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Projects_Blobs_BlobId",
                         column: x => x.BlobId,
                         principalTable: "Blobs",
                         principalColumn: "Id",
@@ -173,11 +166,6 @@ namespace YuukoResume.Migrations
                 name: "IX_Logs_Time",
                 table: "Logs",
                 column: "Time");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Projects_BlobId",
-                table: "Projects",
-                column: "BlobId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_From",
