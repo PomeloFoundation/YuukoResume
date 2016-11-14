@@ -226,7 +226,19 @@
                             <div class="section_body contact_section_body certificates">
                                 @foreach (Certificate x in ViewBag.Certificates)
                                 {
-                                    <img src="/file/download/@x.BlobId">
+                                    <div class="category @(ViewBag.Certificates[0] == x ? "first" : "")">
+                                        <div class="category_header resume_category_header certificate_item">
+                                            <h3 class="category_title"><span class="category_title_icon red"></span>@x.Title</h3>
+                                        </div>
+                                        <div class="category_body resume_category_body">
+                                            <article class="post certificate_article">
+                                                <div class="post_body resume_post_body certificate_article">
+                                                    <img class="certificate_img" src="/file/download/@x.BlobId">
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <!-- .category_body -->
+                                    </div>
                                 }
                             </div>
                             <!-- .section_body -->

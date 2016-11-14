@@ -10,6 +10,8 @@ namespace YuukoResume.Controllers
 {
     public class HomeController : BaseController
     {
+        [Route("/")]
+        [Route("/lang/{culture}")]
         public async Task<IActionResult> Index()
         {
             ViewBag.ProfessionalSkills = await DB.Skills

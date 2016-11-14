@@ -22,7 +22,7 @@ fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td {
 border: 0; font-family: inherit, 'Microsoft YaHei'; font-size: 100%; font-style: inherit; font-weight: inherit; margin: 0; outline: 0; padding: 0; vertical-align: baseline;}
 html { overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-body { background: #f4f4f4; font-family: 'Lato', sans-serif; font-size: 14px; line-height: 20px; color: #646464;}
+body { background: #f4f4f4; font-family: 'Lato', sans-serif, 'Microsoft YaHei'; font-size: 14px; line-height: 20px; color: #646464;}
 
 a img { border: none;}
 
@@ -73,7 +73,7 @@ strong { font-weight: 700;}
 .bg1{ background-image: url(../images/bg/bg1.jpg); background-repeat: no-repeat; background-position: top center; background-attachment: fixed;}
 .bg2{ background-image: url(../images/bg/bg2.jpg); background-repeat: no-repeat; background-position: top center; background-attachment: fixed;}
 .bg3{ background: url(../images/bg/bg3.jpg); background-repeat: no-repeat; background-position: top center; background-attachment: fixed;}
-.pattern1{ background-image: url(../images/bg/pattern1.png); background-repeat:) repeat; background-position: center center;}
+.pattern1{ background-image: url(../images/bg/pattern1.png); background-repeat: repeat; background-position: center center;}
 .pattern2{ background-image: url(../images/bg/pattern2.png); background-repeat: repeat; background-position: center center;}
 .pattern3{ background-image: url(../images/bg/pattern3.jpg); background-repeat: repeat; background-position: center center;}
 .pattern4{ background-image: url(../images/bg/pattern4.png); background-repeat: repeat; background-position: center center;}
@@ -1190,4 +1190,15 @@ div.sc_googlemap .map-canvas { min-width:100px; min-height:100px;}
     float:left;
     font-size: 14px;
     line-height: 18.86px;
+}
+
+.certificate_item {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.certificate_article {
+    margin-top: 0!important;
+    padding-top: 0!important;
+    padding-bottom: 13px!important;
 }

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = SR["Dashboard"];
+    ViewBag.Title = SR["Profile"];
     var CurrentCulture = CultureProvider.DetermineCulture();
     var Name = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Name[CurrentCulture] : YuukoResume.Startup.Profile.Name.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x.Value)).Value;
     var Position = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Position[CurrentCulture] : YuukoResume.Startup.Profile.Position.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x.Value)).Value;
@@ -22,7 +22,7 @@
                 </tr>
                 <tr>
                     <td>@SR["Age"]</td>
-                    <td>@((DateTime.Now - YuukoResume.Startup.Profile.Birthday).TotalDays / 365)</td>
+                    <td>@((int)(DateTime.Now - YuukoResume.Startup.Profile.Birthday).TotalDays / 365)</td>
                 </tr>
                 <tr>
                     <td>@SR["Telephone"]</td>
