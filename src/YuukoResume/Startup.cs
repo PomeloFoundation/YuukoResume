@@ -42,7 +42,7 @@ namespace YuukoResume
                     x.AddCulture(c.Cultures.ToObject<string[]>(), new JsonLocalizedStringStore(Path.Combine("Localization", c.Source.ToString())));
             });
 
-            // services.AddSmtpEmailSender(Profile.SmtpServer, Profile.SmtpPort, Profile.Name.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x.Value)).Value, Profile.SmtpUsername, Profile.SmtpUsername, Profile.SmtpPassword);
+            services.AddSmtpEmailSender(Profile.SmtpServer, Profile.SmtpPort, Profile.Name.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x.Value)).Value, Profile.SmtpUsername, Profile.SmtpUsername, Profile.SmtpPassword);
         }
 
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
