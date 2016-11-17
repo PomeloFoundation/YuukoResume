@@ -39,6 +39,9 @@
         </table>
     </div>
 </div>
+<div style="margin-top:-30px;">
+    @Html.Paging("", "active", "pagination")
+</div>
 <form id="frmRemove" asp-action="RemoveProject" asp-controller="Admin" asp-route-id="NULL"></form>
 <script>
     function remove(id)
