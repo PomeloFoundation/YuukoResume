@@ -13,7 +13,7 @@ namespace YuukoResume
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls("http://*:80")
+                .UseIISIntegration()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .Build();
