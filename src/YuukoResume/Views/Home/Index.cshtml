@@ -129,7 +129,16 @@
                                             {
                                                 <article class="post resume_post resume_post_1 @(i == 0 ? "first" : "") @(i % 2 == 0 ? "odd" : "even")">
                                                     <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">@ViewBag.Experiences[i].From.ToString(SR["YEAR_MONTH_FORMAT"])</span> - <span class="period_to">@(ViewBag.Experiences[i].To == null ? SR["present"] : ViewBag.Experiences[i].To.Value.ToString(SR["YEAR_MONTH_FORMAT"]))</span> </div>
+                                                        <div class="resume_period">
+                                                            @if (Html.IsOneMonthDuration((DateTime)ViewBag.Experiences[i].From, (DateTime?)ViewBag.Experiences[i].To))
+                                                            {
+                                                                <span class="period_from">@ViewBag.Experiences[i].From.ToString(SR["YEAR_MONTH_FORMAT"])</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="period_from">@ViewBag.Experiences[i].From.ToString(SR["YEAR_MONTH_FORMAT"])</span>@(new HtmlString(" - "))<span class="period_to">@(ViewBag.Experiences[i].To == null ? SR["present"] : ViewBag.Experiences[i].To.ToString(SR["YEAR_MONTH_FORMAT"]))</span>
+                                                            }
+                                                        </div>
                                                         <h4 class="post_title"><span class="post_title_icon aqua"></span><a href="#">@ViewBag.Experiences[i].Company</a></h4>
                                                         <h5 class="post_subtitle">@ViewBag.Experiences[i].Position</h5>
                                                     </div>
@@ -151,7 +160,16 @@
                                             {
                                                 <article class="post resume_post resume_post_@i @(i == 0 ? "first" : "") @(i % 2 == 0 ? "odd" : "even")">
                                                     <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">@ViewBag.Educations[i].From.ToString(SR["YEAR_MONTH_FORMAT"])</span> - <span class="period_to">@(ViewBag.Educations[i].To == null ? SR["present"] : ViewBag.Educations[i].To.ToString(SR["YEAR_MONTH_FORMAT"]))</span> </div>
+                                                        <div class="resume_period"> 
+                                                            @if (Html.IsOneMonthDuration((DateTime)ViewBag.Educations[i].From, (DateTime?)ViewBag.Educations[i].To))
+                                                            {
+                                                                <span class="period_from">@ViewBag.Educations[i].From.ToString(SR["YEAR_MONTH_FORMAT"])</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="period_from">@ViewBag.Educations[i].From.ToString(SR["YEAR_MONTH_FORMAT"])</span>@(new HtmlString(" - "))<span class="period_to">@(ViewBag.Educations[i].To == null ? SR["present"] : ViewBag.Educations[i].To.ToString(SR["YEAR_MONTH_FORMAT"]))</span>
+                                                            }
+                                                        </div>
                                                         <h4 class="post_title"><span class="post_title_icon green"></span><a href="#">@ViewBag.Educations[i].School</a></h4>
                                                         <h5 class="post_subtitle">@ViewBag.Educations[i].Profession</h5>
                                                     </div>
@@ -174,38 +192,49 @@
                             </div>
                             <div class="section_body portfolio_section_body">
                                 <div class="wrapper resume_wrapper">
-                                    @foreach (GroupedProject group in ViewBag.Projects)
+                                    @{ var IsFirst = true; }
+                                    @foreach (var x in ((List<Project>)ViewBag.Projects).GroupBy(x => x.Catalog))
                                     {
-                                        <div class="category @(ViewBag.Projects[0] == group ? "first" : "")">
+                                        <div class="category @(IsFirst ? "first" : "")">
+                                            @{ IsFirst = false; }
                                             <div class="category_header resume_category_header">
-                                                <h3 class="category_title"><span class="category_title_icon yellow"></span>@group.Catalog</h3>
+                                                <h3 class="category_title"><span class="category_title_icon yellow"></span>@x.Key</h3>
                                             </div>
                                             <div class="category_body resume_category_body">
-                                                @for (var i = 0; i < group.Projects.Count(); i++)
+                                                @for (var i = 0; i < x.Count(); i++)
                                                 {
                                                     <article class="post resume_post resume_post_@i @(i == 0 ? "first" : "") @(i % 2 == 0 ? "odd" : "even")">
                                                         <div class="post_header resume_post_header">
-                                                            <div class="resume_period"> <span class="period_from">@group.Projects.ElementAt(i).From.ToString(SR["YEAR_MONTH_FORMAT"])</span> - <span class="period_to">@(group.Projects.ElementAt(i).To == null ? SR["present"] : group.Projects.ElementAt(i).To.Value.ToString(SR["YEAR_MONTH_FORMAT"]))</span></div>
-                                                            <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">@group.Projects.ElementAt(i).Title</a></h4>
+                                                            <div class="resume_period">
+                                                                @if (Html.IsOneMonthDuration(x.ElementAt(i).From, x.ElementAt(i).To))
+                                                                {
+                                                                    <span class="period_from">@x.ElementAt(i).From.ToString(SR["YEAR_MONTH_FORMAT"])</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span class="period_from">@x.ElementAt(i).From.ToString(SR["YEAR_MONTH_FORMAT"])</span>@(new HtmlString(" - "))<span class="period_to">@(x.ElementAt(i).To == null ? SR["present"] : x.ElementAt(i).To.Value.ToString(SR["YEAR_MONTH_FORMAT"]))</span>
+                                                                }
+                                                            </div>
+                                                            <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">@x.ElementAt(i).Title</a></h4>
                                                             <h5 class="post_subtitle">
-                                                                @if (!string.IsNullOrWhiteSpace(group.Projects.ElementAt(i).Tags))
+                                                                @if (!string.IsNullOrWhiteSpace(x.ElementAt(i).Tags))
                                                                 {
-                                                                    <i class="icon icon-tags"></i> @group.Projects.ElementAt(i).Tags
+                                                                    <i class="icon icon-tags"></i> @x.ElementAt(i).Tags
                                                                 }
-                                                                @if (!string.IsNullOrWhiteSpace(group.Projects.ElementAt(i).GitHub))
+                                                                @if (!string.IsNullOrWhiteSpace(x.ElementAt(i).GitHub))
                                                                 {
                                                                     @("&nbsp; &nbsp;")
-                                                                    <i class="icon icon-github"></i> <a target="_blank" href="@group.Projects.ElementAt(i).GitHub">@group.Projects.ElementAt(i).GitHub.Replace("https://github.com/", "")</a>
+                                                                    <i class="icon icon-github"></i> <a target="_blank" href="@x.ElementAt(i).GitHub">@x.ElementAt(i).GitHub.Replace("https://github.com/", "")</a>
                                                                 }
-                                                                @if (!string.IsNullOrWhiteSpace(group.Projects.ElementAt(i).GitHub))
+                                                                @if (!string.IsNullOrWhiteSpace(x.ElementAt(i).GitHub))
                                                                 {
                                                                     @("&nbsp; &nbsp;")
-                                                                    <i class="icon icon-eye-open"></i> <a target="_blank" href="@group.Projects.ElementAt(i).DemoUrl">Demo</a>
+                                                                    <i class="icon icon-eye-open"></i> <a target="_blank" href="@x.ElementAt(i).DemoUrl">Demo</a>
                                                                 }
                                                             </h5>
                                                         </div>
                                                         <div class="post_body resume_post_body">
-                                                            @Html.Marked(group.Projects.ElementAt(i).Description)
+                                                            @Html.Marked(x.ElementAt(i).Description)
                                                         </div>
                                                     </article>
                                                 }

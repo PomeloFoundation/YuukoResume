@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using YuukoResume.ViewModels;
 
 namespace YuukoResume.Controllers
 {
@@ -30,13 +29,8 @@ namespace YuukoResume.Controllers
                 .OrderByDescending(x => x.From)
                 .ToListAsync();
             ViewBag.Projects = await DB.Projects
-                .GroupBy(x => x.Catalog)
-                .Select(x => new GroupedProject
-                {
-                    Catalog = x.Key,
-                    Projects = x.OrderByDescending(y => y.From).ToList()
-                })
-                .OrderBy(x => x.Catalog)
+                .OrderByDescending(x => x.From)
+                .ThenBy(x => x.To)
                 .ToListAsync();
             ViewBag.Experiences = await DB.Experiences
                 .OrderByDescending(x => x.From)
