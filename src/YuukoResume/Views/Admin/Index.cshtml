@@ -1,272 +1,81 @@
 ﻿@{
-    Layout = null;
+    ViewBag.Title = SR["Profile"];
     var CurrentCulture = CultureProvider.DetermineCulture();
     var Name = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Name[CurrentCulture] : YuukoResume.Startup.Profile.Name.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x.Value)).Value;
     var Position = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.Position[CurrentCulture] : YuukoResume.Startup.Profile.Position.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x.Value)).Value;
     var SelfIntroduce = YuukoResume.Startup.Profile.Name.ContainsKey(CurrentCulture) ? YuukoResume.Startup.Profile.SelfIntroduce[CurrentCulture] : YuukoResume.Startup.Profile.SelfIntroduce.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x.Value)).Value;
-    var Colors = new[] { "blue", "aqua", "green", "yellow", "red" };
 }
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>@Name - @SR["Curriculum Vitae"]</title>
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
-    <link rel="stylesheet" type="text/css" media="all" href="~/home/style/style.css">
-    <link rel="stylesheet" type="text/css" media="all" href="~/home/style/responsive.css">
-    <!--[if lt IE 9]>
-        <script src="js/html5.js" type="text/javascript"></script>
-    <![endif]-->
-</head>
-<body class="home blog dark">
-    <div class="switherHead"></div>
-    <div class="colored">
-        <div class="blue"></div>
-        <div class="aqua"></div>
-        <div class="green"></div>
-        <div class="yellow"></div>
-        <div class="red"></div>
-    </div>
-    <div class="hfeed site" id="page">
-        <header role="banner" class="site_header" id="header">
-            <div class="languages">
-                <span class="label-language">@SR["Language"]</span>
-                <a asp-action="Language" asp-controller="Home" asp-route-id="en"><img src="~/home/images/en.png" /></a>
-                <a asp-action="Language" asp-controller="Home" asp-route-id="zh"><img src="~/home/images/zh.png" /></a>
-            </div>
-            <div class="social_links">
-                <ul>
-                    @if (!string.IsNullOrWhiteSpace(YuukoResume.Startup.Profile.LinkedInUrl))
-                    {
-                        <li><a href="@YuukoResume.Startup.Profile.LinkedInUrl" target="_blank" title="Linkedin"><i class="icon icon-linkedin"></i></a></li>
-                    }
-                    @if (!string.IsNullOrWhiteSpace(YuukoResume.Startup.Profile.GitHubUrl))
-                    {
-                        <li><a href="https://github.com/Kagamine" target="_blank" title="GitHub"><i class="icon icon-github"></i></a></li>
-                    }
-                </ul>
-            </div>
-        </header>
-        <div id="main">
-            <div class="content_area" id="primary">
-                <div role="main" class="site_content" id="content">
-                    <section class="section profile_section first odd" id="profile">
-                        <a id="blog_page_link" href="@(string.IsNullOrWhiteSpace(YuukoResume.Startup.Profile.BlogUrl) ? "#" : YuukoResume.Startup.Profile.BlogUrl)"><span class="icon-pencil icon"></span><span class="label">Blog</span></a>
-                        <div class="section_header profile_section_header opened">
-                            <h2 class="section_title profile_section_title vis"><a href="#"><span class="icon icon-user"></span><span class="section_name">@SR["Profile"]</span></a><span class="section_icon"></span></h2>
-                            <div id="profile_header">
-                                <div id="profile_user">
-                                    <div id="profile_photo"><img src="~/file/download/@YuukoResume.Startup.Profile.AvatarId" /></div>
-                                    <div id="profile_name_area">
-                                        <div id="profile_name">
-                                            <h1 id="profile_title"><span class="firstname">@Name</span></h1>
-                                            <h4 id="profile_position">@Position</h4>
-                                            <h4>@SR["{0} years old", ((long)(DateTime.Now - YuukoResume.Startup.Profile.Birthday).TotalDays / 365)] / @YuukoResume.Startup.Profile.Telephone / @YuukoResume.Startup.Profile.Email</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="section_body profile_section_body">
-                            <div class="proile_body">@SelfIntroduce </div>
-                        </div>
-                    </section>
-                    <div id="mainpage_accordion_area">
 
-                        <!-- RESUME -->
-                        <section class="section resume_section even" id="resume">
-                            <div class="section_header resume_section_header">
-                                <h2 class="section_title resume_section_title"><a href="#"><span class="icon icon-align-left"></span><span class="section_name">@SR["Resume"]</span></a><span class="section_icon"></span></h2>
-                            </div>
-                            <div class="section_body resume_section_body">
-                                <div class="sidebar resume_sidebar">
-                                    <aside class="widget widget_skills">
-                                        <h3 class="widget_title">@SR["Professional Skills"]</h3>
-                                        <div class="widget_inner style_1">
-                                            @for (var i = 0; i < ViewBag.ProfessionalSkills.Count; i++)
-                                            {
-                                                <div class="skills_row @(i % 2 == 0 ? "odd" : "even") @(i == 0 ? "first" : "")"><span class="caption">@ViewBag.ProfessionalSkills[i].Title</span><span class="progressbar"><span data-process="@ViewBag.ProfessionalSkills[i].Level%" class="progress @Colors[i % Colors.Count()]"><span class="value">@ViewBag.ProfessionalSkills[i].Level%</span></span></span></div>
-                                            }
-                                        </div>
-                                    </aside>
-                                    <aside class="widget widget_skills">
-                                        <h3 class="widget_title">@SR["Other Skills"]</h3>
-                                        <div class="widget_inner style_2">
-                                            @for (var i = 0; i < ViewBag.OtherSkills.Count; i++)
-                                            {
-                                                <div class="skills_row @(i % 2 == 0 ? "odd" : "even")"><span class="legend @(Colors[i % Colors.Count()])"></span><span class="caption">@ViewBag.OtherSkills[i].Title</span></div>
-                                            }
-                                            <div class="svg">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="piechart">
-                                                    <path d="M66,66 L130,66  A64,64 0 0,1 57,129 z" fill="#327ea3"></path>
-                                                    <path d="M66,66 L57, 129 A64,64 0 0,1 2,60 z" fill="#4ca5d0"></path>
-                                                    <path d="M66,66 L2,  60  A64,64 0 0,1 34,11 z" fill="#6ca338"></path>
-                                                    <path d="M66,66 L34, 11  A64,64 0 0,1 103,14 z" fill="#ffbc38"></path>
-                                                    <path d="M66,66 L103,14  A64,64 0 0,1 130,66 z" fill="#e82c0c"></path>
-                                                    <circle cx="66" cy="66" r="40" fill="#ffffff"></circle>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </aside>
-                                    <aside class="widget widget_skills">
-                                        <h3 class="widget_title">@SR["Language Skills"]</h3>
-                                        <div class="widget_inner style_3">
-                                            @for (var i = 0; i < ViewBag.LanguageSkills.Count; i++)
-                                            {
-                                                <div class="skills_row @(i % 2 == 0 ? "odd" : "even") @(i == 0 ? "first" : "")"><span class="caption">@ViewBag.LanguageSkills[i].Title</span><span class="progressbar"><span data-process="@ViewBag.LanguageSkills[i].Level%" class="progress @Colors[i % Colors.Count()]"></span></span></div>
-                                            }
-                                        </div>
-                                    </aside>
-                                </div>
-                                <div class="wrapper resume_wrapper">
-                                    <div class="category resume_category resume_category_1 first even">
-                                        <div class="category_header resume_category_header">
-                                            <h3 class="category_title"><span class="category_title_icon aqua"></span>@SR["Working Experience"]</h3>
-                                        </div>
-                                        <div class="category_body resume_category_body">
-                                            @for (var i = 0; i < ViewBag.Experiences.Count; i++)
-                                            {
-                                                <article class="post resume_post resume_post_1 @(i == 0 ? "first" : "") @(i % 2 == 0 ? "odd" : "even")">
-                                                    <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">@ViewBag.Experiences[i].From.ToString(SR["YEAR_MONTH_FORMAT"])</span> - <span class="period_to">@(ViewBag.Experiences[i].To == null ? SR["present"] : ViewBag.Experiences[i].To.ToString(SR["YEAR_MONTH_FORMAT"]))</span> </div>
-                                                        <h4 class="post_title"><span class="post_title_icon aqua"></span><a href="#">@ViewBag.Experiences[i].Company</a></h4>
-                                                        <h5 class="post_subtitle">@ViewBag.Experiences[i].Position</h5>
-                                                    </div>
-                                                    <div class="post_body resume_post_body">
-                                                        @Html.Marked(ViewBag.Experiences[i].Description as string)
-                                                    </div>
-                                                </article>
-                                            }
-                                        </div>
-                                        <!-- .category_body -->
-                                    </div>
-                                    <!-- .category -->
-                                    <div class="category resume_category resume_category_2 odd">
-                                        <div class="category_header resume_category_header">
-                                            <h3 class="category_title"><span class="category_title_icon green"></span>@SR["Education"]</h3>
-                                        </div>
-                                        <div class="category_body resume_category_body">
-                                            @for (var i = 0; i < ViewBag.Educations.Count; i++)
-                                            {
-                                                <article class="post resume_post resume_post_@i @(i == 0 ? "first" : "") @(i % 2 == 0 ? "odd" : "even")">
-                                                    <div class="post_header resume_post_header">
-                                                        <div class="resume_period"> <span class="period_from">@ViewBag.Educations[i].From.ToString(SR["YEAR_MONTH_FORMAT"])</span> - <span class="period_to">@(ViewBag.Educations[i].To == null ? SR["present"] : ViewBag.Educations[i].To.ToString(SR["YEAR_MONTH_FORMAT"]))</span> </div>
-                                                        <h4 class="post_title"><span class="post_title_icon green"></span><a href="#">@ViewBag.Educations[i].School</a></h4>
-                                                        <h5 class="post_subtitle">@ViewBag.Educations[i].Profession</h5>
-                                                    </div>
-                                                </article>
-                                            }
-                                        </div>
-                                        <!-- /category_body -->
-                                    </div>
-                                    <!-- /category -->
-                                </div>
-                                <!-- /wrapper -->
-                            </div>
-                            <!-- /section_body -->
-                        </section>
-                        <!-- /RESUME-->
-                        <!-- PORTFOLIO -->
-                        <section class="section portfolio_section odd" id="portfolio">
-                            <div class="section_header portfolio_section_header">
-                                <h2 class="section_title portfolio_section_title"><a href="#"><span class="icon icon-briefcase"></span><span class="section_name">@SR["Portfolio"]</span></a><span class="section_icon"></span></h2>
-                            </div>
-                            <div class="section_body portfolio_section_body">
-                                <div class="wrapper resume_wrapper">
-                                    @foreach (GroupedProject group in ViewBag.Projects)
-                                    {
-                                        <div class="category @(ViewBag.Projects[0] == group ? "first" : "")">
-                                            <div class="category_header resume_category_header">
-                                                <h3 class="category_title"><span class="category_title_icon yellow"></span>@group.Catalog</h3>
-                                            </div>
-                                            <div class="category_body resume_category_body">
-                                                @for (var i = 0; i < group.Projects.Count(); i++)
-                                                {
-                                                    <article class="post resume_post resume_post_@i @(i == 0 ? "first" : "") @(i % 2 == 0 ? "odd" : "even")">
-                                                        <div class="post_header resume_post_header">
-                                                            <div class="resume_period"> <span class="period_from">@group.Projects.ElementAt(i).From.ToString(SR["YEAR_MONTH_FORMAT"])</span> - <span class="period_to">@(group.Projects.ElementAt(i).To == null ? SR["present"] : group.Projects.ElementAt(i).To.Value.ToString(SR["YEAR_MONTH_FORMAT"]))</span></div>
-                                                            <h4 class="post_title"><span class="post_title_icon yellow"></span><a href="#">@group.Projects.ElementAt(i).Title</a></h4>
-                                                            <h5 class="post_subtitle">
-                                                                @if (!string.IsNullOrWhiteSpace(group.Projects.ElementAt(i).Tags))
-                                                                {
-                                                                    <i class="icon icon-tags"></i> @group.Projects.ElementAt(i).Tags
-                                                                }
-                                                                @if (!string.IsNullOrWhiteSpace(group.Projects.ElementAt(i).GitHub))
-                                                                {
-                                                                    @(new HtmlString("&nbsp; &nbsp;"))
-                                                                    <i class="icon icon-github"></i> <a target="_blank" href="@group.Projects.ElementAt(i).GitHub">@group.Projects.ElementAt(i).GitHub.Replace("https://github.com/", "")</a>
-                                                                }
-                                                                @if (!string.IsNullOrWhiteSpace(group.Projects.ElementAt(i).DemoUrl))
-                                                                {
-                                                                    @(new HtmlString("&nbsp; &nbsp;"))
-                                                                    <i class="icon icon-eye-open"></i> <a target="_blank" href="@group.Projects.ElementAt(i).DemoUrl">Demo</a>
-                                                                }
-                                                            </h5>
-                                                        </div>
-                                                        <div class="post_body resume_post_body">
-                                                            @Html.Marked(group.Projects.ElementAt(i).Description)
-                                                        </div>
-                                                    </article>
-                                                }
-                                            </div>
-                                            <!-- .category_body -->
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                            <!-- .section_body -->
-                        </section>
-                        <!-- /PORTFOLIO -->
-                        <!-- CONTACTS -->
-                        <section class="section contact_section even" id="contact">
-                            <div class="section_header contact_section_header">
-                                <h2 class="section_title contact_section_title"><a href="#"><span class="icon icon-certificate"></span><span class="section_name">@SR["Certificates"]</span></a><span class="section_icon"></span></h2>
-                            </div>
-                            <div class="section_body contact_section_body certificates">
-                                @foreach (Certificate x in ViewBag.Certificates)
-                                {
-                                    <div class="category @(ViewBag.Certificates[0] == x ? "first" : "")">
-                                        <div class="category_header resume_category_header certificate_item">
-                                            <h3 class="category_title"><span class="category_title_icon red"></span>@x.Title</h3>
-                                        </div>
-                                        <div class="category_body resume_category_body">
-                                            <article class="post certificate_article">
-                                                <div class="post_body resume_post_body certificate_article">
-                                                    <img class="certificate_img" src="/file/download/@x.BlobId">
-                                                </div>
-                                            </article>
-                                        </div>
-                                        <!-- .category_body -->
-                                    </div>
-                                }
-                            </div>
-                            <!-- .section_body -->
-                        </section>
-                        <!-- /CONTACT -->
-                    </div>
-                    <!-- #mainpage_accordion_area -->
-                </div>
-                <!-- #content -->
-            </div>
-            <!-- #primary -->
+<div class="col-md-2">
+    <img style="width: 100%;" src="/file/download/@YuukoResume.Startup.Profile.AvatarId" />
+</div>
+<div class="col-md-10">
+    <div class="card">
+        <div class="header">
+            <h4 class="title">@ViewBag.Title</h4>
         </div>
-        <!-- #main -->
-
-        <footer role="contentinfo" class="site_footer" id="footer">
-            <div class="footer_copyright">&copy; <a href="https://github.com/PomeloFoundation/YuukoResume">Pomelo Foundation</a> 2016 All Rights Reserved.</div>
-        </footer>
+        <div class="content table-responsive table-full-width">
+            <table class="table table-hover table-striped">
+                <tr>
+                    <td>@SR["Full Name"]</td>
+                    <td>@Name</td>
+                </tr>
+                <tr>
+                    <td>@SR["Age"]</td>
+                    <td>@((int)(DateTime.Now - YuukoResume.Startup.Profile.Birthday).TotalDays / 365)</td>
+                </tr>
+                <tr>
+                    <td>@SR["Telephone"]</td>
+                    <td>@YuukoResume.Startup.Profile.Telephone</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>@YuukoResume.Startup.Profile.Email</td>
+                </tr>
+                <tr>
+                    <td>@SR["Position"]</td>
+                    <td>@Position</td>
+                </tr>
+                <tr>
+                    <td>@SR["Self Introduce"]</td>
+                    <td>@SelfIntroduce</td>
+                </tr>
+                <tr>
+                    <td>@SR["GitHub Homepage"]</td>
+                    <td>@YuukoResume.Startup.Profile.GitHubUrl</td>
+                </tr>
+                <tr>
+                    <td>@SR["LinkedIn Homepage"]</td>
+                    <td>@YuukoResume.Startup.Profile.LinkedInUrl</td>
+                </tr>
+                <tr>
+                    <td>@SR["Blog URL"]</td>
+                    <td>@YuukoResume.Startup.Profile.BlogUrl</td>
+                </tr>
+                @*<tr>
+                        <td>@SR["SMTP Host"]</td>
+                        <td>@YuukoResume.Startup.Profile.SmtpServer</td>
+                    </tr>
+                    <tr>
+                        <td>@SR["SMTP Port"]</td>
+                        <td>@YuukoResume.Startup.Profile.SmtpPort</td>
+                    </tr>
+                    <tr>
+                        <td>@SR["SMTP Username"]</td>
+                        <td>@YuukoResume.Startup.Profile.SmtpUsername</td>
+                    </tr>
+                    <tr>
+                        <td>@SR["SMTP Password"]</td>
+                        <td>@YuukoResume.Startup.Profile.SmtpPassword</td>
+                    </tr>
+                    <tr>
+                        <td>SMTP SSL</td>
+                        <td>@YuukoResume.Startup.Profile.SmtpSSL</td>
+                    </tr>*@
+            </table>
+            <p style="text-align: center">
+                <a asp-action="Profile" asp-controller="Admin" class="btn btn-primary">@SR["Edit Profile"]</a>
+            </p>
+        </div>
     </div>
-    <!-- #page -->
-    <!-- connect js -->
-    <script type="text/javascript" src="~/home/js/jquery.min.js"></script>
-    <script type="text/javascript" src="~/home/js/jquery.tools.custom.js"></script>
-    <script type="text/javascript" src="~/home/js/jquery.flexslider.min.js"></script>
-    <script type="text/javascript" src="~/home/js/jquery.prettyPhoto.js"></script>
-    <script type="text/javascript" src="~/home/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="~/home/js/jquery.easing.js"></script>
-    <script type="text/javascript" src="~/home/js/jquery.reject.js"></script>
-    <script type="text/javascript" src="~/home/js/utils.js"></script>
-    <script type="text/javascript" src="~/home/js/lib.js"></script>
-</body>
-</html>
+</div>
