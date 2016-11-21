@@ -226,7 +226,7 @@
                                                                     @(new HtmlString("&nbsp; &nbsp;"))
                                                                     <i class="icon icon-github"></i> <a target="_blank" href="@x.ElementAt(i).GitHub">@x.ElementAt(i).GitHub.Replace("https://github.com/", "")</a>
                                                                 }
-                                                                @if (!string.IsNullOrWhiteSpace(x.ElementAt(i).GitHub))
+                                                                @if (!string.IsNullOrWhiteSpace(x.ElementAt(i).DemoUrl))
                                                                 {
                                                                     @(new HtmlString("&nbsp; &nbsp;"))
                                                                     <i class="icon icon-eye-open"></i> <a target="_blank" href="@x.ElementAt(i).DemoUrl">Demo</a>
