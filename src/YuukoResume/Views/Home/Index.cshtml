@@ -193,7 +193,7 @@
                             <div class="section_body portfolio_section_body">
                                 <div class="wrapper resume_wrapper">
                                     @{ var IsFirst = true; }
-                                    @foreach (var x in ((List<Project>)ViewBag.Projects).GroupBy(x => x.Catalog))
+                                    @foreach (var x in ((List<Project>)ViewBag.Projects).GroupBy(x => x.Catalog).OrderBy(x => x.Key))
                                     {
                                         <div class="category @(IsFirst ? "first" : "")">
                                             @{ IsFirst = false; }
