@@ -77,6 +77,7 @@ namespace YuukoResume.Controllers
         public async Task<IActionResult> Profile(Profile Model, string _name, string _position, string _selfIntroduce, IFormFile Avatar, [FromServices] ICultureProvider cultureProvider)
         {
             var key = cultureProvider.DetermineCulture();
+            Model.AvatarId = Startup.Profile.AvatarId;
             Model.Name = Startup.Profile.Name;
             Model.Position = Startup.Profile.Position;
             Model.SelfIntroduce = Startup.Profile.SelfIntroduce;
