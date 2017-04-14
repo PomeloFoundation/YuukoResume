@@ -5,6 +5,6 @@
   },
   {
     "Source": "zh-CN.json",
-    "Cultures": [ "zh", "zh-CN", "zh-cn", "zh-Hans" ]
+    "Cultures": [ "zh", "zh-CN", "zh-cn", "zh-Hans", "zh-Hans-CN" ]
   }
 ]
